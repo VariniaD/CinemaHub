@@ -3,21 +3,67 @@
 const parametros = new URLSearchParams(window.location.search);
 
 
-// GUARDA LOS DATOS RECIBIDOS DESDE COMPRA
+// RECUPERA EL ÚLTIMO TICKET GUARDADO
 
-const pelicula = parametros.get("pelicula");
+const ticketGuardadoTexto =
+    localStorage.getItem("ultimoTicket");
 
-const cine = parametros.get("cine");
 
-const hora = parametros.get("hora");
+// CREA UNA VARIABLE PARA EL TICKET
 
-const sala = parametros.get("sala");
+let ticketGuardado = null;
 
-const asientosTexto = parametros.get("asientos");
 
-const nombreComprador = parametros.get("nombre");
+// CONVIERTE EL TEXTO GUARDADO EN UN OBJETO
 
-const total = parametros.get("total");
+if (ticketGuardadoTexto) {
+
+    try {
+
+        ticketGuardado =
+            JSON.parse(ticketGuardadoTexto);
+
+    } catch (error) {
+
+        ticketGuardado = null;
+    }
+}
+
+
+// OBTIENE LOS DATOS DE LA URL
+// SI NO EXISTEN, UTILIZA EL ÚLTIMO TICKET GUARDADO
+
+const pelicula =
+    parametros.get("pelicula") ||
+    (ticketGuardado && ticketGuardado.pelicula);
+
+const cine =
+    parametros.get("cine") ||
+    (ticketGuardado && ticketGuardado.cine);
+
+const hora =
+    parametros.get("hora") ||
+    (ticketGuardado && ticketGuardado.hora);
+
+const sala =
+    parametros.get("sala") ||
+    (ticketGuardado && ticketGuardado.sala);
+
+const fecha =
+    parametros.get("fecha") ||
+    (ticketGuardado && ticketGuardado.fecha);
+
+const asientosTexto =
+    parametros.get("asientos") ||
+    (ticketGuardado && ticketGuardado.asientos);
+
+const nombreComprador =
+    parametros.get("nombre") ||
+    (ticketGuardado && ticketGuardado.nombre);
+
+const total =
+    parametros.get("total") ||
+    (ticketGuardado && ticketGuardado.total);
 
 
 // CREA UN ARREGLO PARA LOS ASIENTOS
@@ -73,13 +119,13 @@ if (pelicula) {
 
 // MUESTRA EL NOMBRE DEL CINE
 
-if (cine === "centro") {
+if (cine === "norte") {
 
-    cineTicket.textContent = "CinemaHub Centro";
+    cineTicket.textContent = "CinemaHub Norte";
 
 } else {
 
-    cineTicket.textContent = "CinemaHub";
+    cineTicket.textContent = "CinemaHub Centro";
 }
 
 
@@ -133,61 +179,53 @@ if (total) {
     totalTicket.textContent = "Bs 0.00";
 }
 
+// FORMATEA LA FECHA SELECCIONADA
 
-// OBTIENE LA FECHA ACTUAL
+function formatearFecha(fechaTexto) {
 
-const fechaActual = new Date();
-
-
-// CREA UNA LISTA CON LOS NOMBRES DE LOS MESES
-
-const meses = [
-    "Ene",
-    "Feb",
-    "Mar",
-    "Abr",
-    "May",
-    "Jun",
-    "Jul",
-    "Ago",
-    "Sep",
-    "Oct",
-    "Nov",
-    "Dic"
-];
+    // Verifica si se recibió una fecha
+    if (!fechaTexto) {
+        return "Sin fecha";
+    }
 
 
-// OBTIENE EL DÍA
-
-const dia = fechaActual.getDate();
-
-
-// OBTIENE EL NOMBRE DEL MES
-
-const mes = meses[fechaActual.getMonth()];
+    // Separa el año, mes y día
+    const partes = fechaTexto.split("-");
 
 
-// OBTIENE EL AÑO
-
-const anio = fechaActual.getFullYear();
-
-
-// FORMA EL TEXTO DE LA FECHA
-
-const fechaTexto =
-    dia + " " + mes + " " + anio;
+    // Crea un objeto de fecha
+    const fechaObjeto = new Date(
+        Number(partes[0]),
+        Number(partes[1]) - 1,
+        Number(partes[2])
+    );
 
 
-// MUESTRA LA FECHA EN EL TICKET
+    // Devuelve la fecha en formato legible
+    return fechaObjeto.toLocaleDateString(
+        "es-BO",
+        {
+            day: "2-digit",
+            month: "short",
+            year: "numeric"
+        }
+    );
+}
 
-fechaTicket.textContent = fechaTexto;
 
+// MUESTRA LA FECHA DE LA FUNCIÓN
+
+fechaTicket.textContent =
+    formatearFecha(fecha);
 
 // GENERA UN NÚMERO SENCILLO PARA EL TICKET
 
 const numeroTicket =
     Math.floor(Math.random() * 9000) + 1000;
 
+// OBTIENE EL AÑO ACTUAL PARA EL CÓDIGO
+
+const anio = new Date().getFullYear();
 
 // UNE LOS ASIENTOS SIN GUIONES
 
