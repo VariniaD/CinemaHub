@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CinemaHub - Completar Compra</title>
+
+    <link rel="stylesheet" href="css/styles.css">
+
+    <link rel="stylesheet" href="css/compra.css">
+</head>
+
+<body>
+
+    <header class="encabezado">
+
+        <div class="contenedor encabezado-contenido">
+
+            <a href="index.html" class="marca">
+
+                <img src="img/logo.svg" alt="Logo de CinemaHub">
+
+                <span>CinemaHub</span>
+
+            </a>
+
+            <nav class="menu-navegacion">
+
+                <ul>
+
+                    <li>
+                        <a href="index.html" class="enlace-activo">
+                            Cartelera
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="confirmacion.html">
+                            Mi Ticket
+                        </a>
+                    </li>
+
+                </ul>
+
+            </nav>
+
+        </div>
+
+    </header>
+
+    <main class="contenido-compra">
+
+        <div class="contenedor distribucion-compra">
+
+            <aside class="resumen-orden">
+
+                <div class="fondo-resumen"></div>
+
+                <div class="contenido-resumen">
+
+                    <h2>
+                        <span>▪</span>
+                        Resumen de Orden
+                    </h2>
+
+                    <div class="pelicula-resumen">
+
+                        <img src="img/comer-rezar-amar.jpeg" alt="Póster de la película Comer, rezar y amar"
+                            id="poster-compra">
+
+                        <div class="informacion-resumen">
+
+                            <h3 id="titulo-compra">Comer, rezar y amar</h3>
+
+                            <p>
+                                <span>◷</span>
+
+                                <span id="fecha-compra">Hoy</span>,
+
+                                <span id="hora-compra">19:30</span> hrs
+                            </p>
+
+                            <p>
+                                <span>●</span>
+                                <span id="cine-compra">CinemaHub Centro</span>
+                            </p>
+
+                            <p id="sala-compra">
+                                Sala Premium
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                    <div class="detalle-entrada">
+
+                        <div class="fila-detalle">
+
+                            <span id="cantidad-asientos">
+                                Asientos (0)
+                            </span>
+
+                            <strong id="asientos-compra">
+                                Sin seleccionar
+                            </strong>
+
+                        </div>
+
+                        <div class="fila-detalle">
+
+                            <span>Tipo</span>
+
+                            <strong>Adulto Regular</strong>
+
+                        </div>
+
+                    </div>
+
+                    <div class="precios-resumen">
+
+                        <div class="fila-precio">
+
+                            <span>Subtotal</span>
+
+                            <span id="subtotal-compra">
+                                Bs 0.00
+                            </span>
+
+                        </div>
+
+                        <div class="fila-precio">
+
+                            <span>Cargo por servicio</span>
+
+                            <span id="cargo-compra">
+                                Bs 0.00
+                            </span>
+
+                        </div>
+
+                        <div class="fila-total">
+
+                            <strong>Total</strong>
+
+                            <strong id="total-compra">
+                                Bs 0.00
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </aside>
+
+            <section class="seccion-formulario">
+
+                <div class="encabezado-compra">
+
+                    <h1>Completa tu compra</h1>
+
+                    <p>
+                        Ingresa tus datos para recibir tu ticket digital.
+                    </p>
+
+                </div>
+
+                <form class="formulario-compra" id="formulario-compra">
+
+                    
+                    <div class="grupo-campo">
+
+                        <label for="nombre">
+                            Nombre completo
+                        </label>
+
+                        <div class="campo-con-icono">
+
+                            <span class="icono-campo">♙</span>
+
+                            <input type="text" id="nombre" name="nombre" placeholder="Ej. Juan Pérez" required>
+
+                        </div>
+
+                    </div>
+
+                    <div class="grupo-campo">
+
+                        <label for="correo">
+                            Correo electrónico
+                        </label>
+
+                        <div class="campo-con-icono">
+
+                            <span class="icono-campo">✉</span>
+
+                            <input type="email" id="correo" name="correo" placeholder="juan@ejemplo.com" required>
+
+                        </div>
+
+                    </div>
+
+                    <div class="grupo-campo">
+
+                        <label for="telefono">
+                            Teléfono
+                            <span class="texto-opcional">
+                                (Opcional)
+                            </span>
+                        </label>
+
+                        <div class="campo-con-icono">
+
+                            <span class="icono-campo">☎</span>
+
+                            <input type="tel" id="telefono" name="telefono" placeholder="+591 70000000">
+
+                        </div>
+
+                    </div>
+
+                    <fieldset class="metodo-pago">
+
+                        <legend>Método de pago</legend>
+
+                        <div class="opciones-pago">
+
+                            <label class="opcion-pago opcion-activa">
+
+                                <input type="radio" name="metodo" value="tarjeta" checked>
+
+                                <span class="icono-pago">▭</span>
+
+                                <span class="nombre-metodo">
+                                    Tarjeta
+                                </span>
+
+                            </label>
+
+                            <label class="opcion-pago">
+
+                                <input type="radio" name="metodo" value="transferencia">
+
+                                <span class="icono-pago">▦</span>
+
+                                <span class="nombre-metodo">
+                                    Transferencia
+                                </span>
+
+                            </label>
+
+                        </div>
+
+                    </fieldset>
+
+                    <div class="datos-tarjeta">
+
+                        <div class="grupo-campo">
+
+                            <label for="numero-tarjeta">
+                                Número de tarjeta
+                            </label>
+
+                            <input type="text" id="numero-tarjeta" name="numero-tarjeta"
+                                placeholder="0000 0000 0000 0000" maxlength="19" inputmode="numeric" required>
+
+                        </div>
+
+                        <div class="campos-tarjeta">
+
+                            <div class="grupo-campo">
+
+                                <label for="vencimiento">
+                                    Vencimiento
+                                </label>
+
+                                <input type="text" id="vencimiento" name="vencimiento" placeholder="MM/AA" maxlength="5"
+                                    inputmode="numeric" required>
+
+                            </div>
+
+                            <div class="grupo-campo">
+
+                                <label for="cvv">
+                                    CVV
+                                </label>
+
+                                <input type="password" id="cvv" name="cvv" placeholder="123" maxlength="3"
+                                    inputmode="numeric" required>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <button type="submit" class="boton-finalizar">
+
+                        Finalizar compra
+
+                        <span>→</span>
+
+                    </button>
+
+                </form>
+
+            </section>
+
+        </div>
+
+    </main>
+
+    <footer class="pie-pagina">
+
+        <div class="contenedor pie-contenido">
+
+            <a href="index.html" class="marca marca-pie">
+
+                <img src="img/logo.svg" alt="Logo de CinemaHub">
+
+                <span>CinemaHub</span>
+
+            </a>
+
+            <p class="derechos">
+                © 2026 CinemaHub. Todos los derechos reservados.
+            </p>
+
+        </div>
+
+    </footer>
+
+    <script src="js/datos.js"></script>
+    <script src="js/compra.js"></script>
+</body>
+
+</html>

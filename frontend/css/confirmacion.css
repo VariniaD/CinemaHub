@@ -1,0 +1,447 @@
+/* CONTENIDO PRINCIPAL */
+
+.contenido-confirmacion {
+    min-height: 1100px;
+    padding-top: 72px;
+    padding-bottom: 72px;
+    background-color: #131313;
+}
+
+
+.contenedor-confirmacion {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+/* MENSAJE DE CONFIRMACIÓN */
+
+.mensaje-confirmacion {
+    margin-bottom: 48px;
+    text-align: center;
+}
+
+
+.icono-confirmacion {
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #e50914;
+    color: #ffffff;
+    border-radius: 50%;
+    box-shadow: 0 8px 24px rgba(229, 9, 20, 0.30);
+}
+
+
+.icono-confirmacion span {
+    font-size: 36px;
+    font-weight: bold;
+}
+
+
+.mensaje-confirmacion h1 {
+    margin-bottom: 10px;
+    color: #e5e2e1;
+    font-size: 48px;
+    line-height: 1.1;
+    letter-spacing: -1px;
+}
+
+
+.mensaje-confirmacion p {
+    color: #e9bcb6;
+    font-size: 18px;
+}
+
+
+/* TICKET DIGITAL */
+
+.ticket-digital {
+    width: 448px;
+    overflow: hidden;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow:
+        0 20px 40px rgba(0, 0, 0, 0.50),
+        inset 0 1px 0 rgba(255, 255, 255, 0.80);
+}
+
+
+/* CABECERA DEL TICKET */
+
+.cabecera-ticket {
+    position: relative;
+    min-height: 98px;
+    overflow: hidden;
+    background-color: #131313;
+}
+
+
+.fondo-cabecera-ticket {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-image: url("../img/comer-rezar-amar.jpeg");
+    background-size: cover;
+    background-position: center;
+    opacity: 0.15;
+}
+
+
+.contenido-cabecera-ticket {
+    position: relative;
+    z-index: 1;
+    padding: 22px 24px;
+    text-align: center;
+}
+
+
+.contenido-cabecera-ticket h2 {
+    margin-bottom: 4px;
+    color: #e50914;
+    font-size: 24px;
+}
+
+
+.contenido-cabecera-ticket p {
+    color: #e9bcb6;
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+
+/* CUERPO DEL TICKET */
+
+.cuerpo-ticket {
+    padding: 42px 48px 46px;
+    background-color: #ffffff;
+}
+
+
+.pelicula-ticket {
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+
+.pelicula-ticket h3 {
+    margin-bottom: 4px;
+    color: #131313;
+    font-size: 30px;
+    line-height: 38px;
+}
+
+
+.pelicula-ticket p {
+    color: #535353;
+    font-size: 16px;
+}
+
+
+.datos-ticket {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+}
+
+
+.dato-ticket {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+
+.titulo-dato {
+    color: #535353;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+}
+
+
+.dato-ticket strong {
+    color: #131313;
+    font-size: 18px;
+}
+
+
+.dato-ticket .asientos-ticket {
+    color: #e50914;
+}
+
+
+.detalle-comprador {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    margin-top: 30px;
+    padding-top: 24px;
+    border-top: 1px solid #dddddd;
+}
+
+
+.detalle-comprador div {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+
+.detalle-comprador span {
+    color: #535353;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+}
+
+
+.detalle-comprador strong {
+    color: #131313;
+    font-size: 15px;
+}
+
+
+/* SEPARADOR DEL TICKET */
+
+.separador-ticket {
+    position: relative;
+    height: 32px;
+    background-color: #ffffff;
+}
+
+
+.linea-corte {
+    position: absolute;
+    top: 15px;
+    left: 20px;
+    right: 20px;
+    border-top: 2px dashed #cccccc;
+}
+
+
+.corte-izquierdo {
+    position: absolute;
+    top: 1px;
+    left: -15px;
+    z-index: 1;
+    width: 30px;
+    height: 30px;
+    background-color: #131313;
+    border-radius: 50%;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.20);
+}
+
+
+.corte-derecho {
+    position: absolute;
+    top: 1px;
+    right: -15px;
+    z-index: 1;
+    width: 30px;
+    height: 30px;
+    background-color: #131313;
+    border-radius: 50%;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.20);
+}
+
+
+/* PIE DEL TICKET */
+
+.pie-ticket {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 24px 24px 34px;
+    background-color: #ffffff;
+}
+
+
+/* CÓDIGO QR VISUAL */
+
+.codigo-qr {
+    position: relative;
+    width: 128px;
+    height: 128px;
+    margin-bottom: 12px;
+    background-color: #131313;
+    border: 12px solid #131313;
+    border-radius: 8px;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.10);
+}
+
+
+.cuadro-qr {
+    position: absolute;
+    width: 34px;
+    height: 34px;
+    padding: 5px;
+    background-color: #ffffff;
+}
+
+
+.cuadro-qr span {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: 5px solid #131313;
+}
+
+
+.superior-izquierdo {
+    top: 0;
+    left: 0;
+}
+
+
+.superior-derecho {
+    top: 0;
+    right: 0;
+}
+
+
+.inferior-izquierdo {
+    bottom: 0;
+    left: 0;
+}
+
+
+.bloque-qr {
+    position: absolute;
+    display: block;
+    background-color: #ffffff;
+}
+
+
+.bloque-1 {
+    top: 8px;
+    left: 50px;
+    width: 12px;
+    height: 12px;
+}
+
+
+.bloque-2 {
+    top: 24px;
+    left: 48px;
+    width: 20px;
+    height: 10px;
+}
+
+
+.bloque-3 {
+    top: 42px;
+    left: 44px;
+    width: 12px;
+    height: 24px;
+}
+
+
+.bloque-4 {
+    top: 48px;
+    right: 10px;
+    width: 22px;
+    height: 12px;
+}
+
+
+.bloque-5 {
+    top: 68px;
+    left: 46px;
+    width: 18px;
+    height: 14px;
+}
+
+
+.bloque-6 {
+    bottom: 12px;
+    left: 48px;
+    width: 12px;
+    height: 22px;
+}
+
+
+.bloque-7 {
+    bottom: 6px;
+    right: 6px;
+    width: 20px;
+    height: 12px;
+}
+
+
+.bloque-8 {
+    bottom: 28px;
+    right: 14px;
+    width: 12px;
+    height: 12px;
+}
+
+
+.bloque-9 {
+    bottom: 36px;
+    left: 68px;
+    width: 12px;
+    height: 20px;
+}
+
+
+.codigo-ticket {
+    margin-bottom: 14px;
+    color: #353534;
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 1.2px;
+}
+
+
+.instruccion-ticket {
+    max-width: 290px;
+    margin-bottom: 24px;
+    color: #535353;
+    font-size: 13px;
+    font-weight: bold;
+    line-height: 19px;
+    text-align: center;
+    letter-spacing: 0.4px;
+}
+
+
+.volver-cartelera {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: #e50914;
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+}
+
+
+.volver-cartelera:hover {
+    text-decoration: underline;
+}
+
+/* AJUSTE PARA LAPTOPS PEQUEÑAS */
+
+@media screen and (max-width: 1100px) {
+
+    .contenido-confirmacion {
+        min-height: 1050px;
+    }
+
+
+    .mensaje-confirmacion h1 {
+        font-size: 40px;
+    }
+
+}

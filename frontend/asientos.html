@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CinemaHub - Selección de Asientos</title>
+
+    <link rel="stylesheet" href="css/styles.css">
+
+    <link rel="stylesheet" href="css/asientos.css">
+</head>
+
+<body>
+
+    <header class="encabezado">
+
+        <div class="contenedor encabezado-contenido">
+
+            <a href="index.html" class="marca">
+
+                <img src="img/logo.svg" alt="Logo de CinemaHub">
+
+                <span>CinemaHub</span>
+
+            </a>
+
+            <nav class="menu-navegacion">
+
+                <ul>
+
+                    <li>
+                        <a href="index.html" class="enlace-activo">
+                            Cartelera
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="confirmacion.html">
+                            Mi Ticket
+                        </a>
+                    </li>
+
+                </ul>
+
+            </nav>
+
+        </div>
+
+    </header>
+
+    <main class="contenido-asientos">
+
+        <div class="contenedor distribucion-asientos">
+
+            <section class="panel-asientos">
+
+                <div class="encabezado-seleccion">
+
+                    <h1>Selecciona tus asientos</h1>
+
+                    <p>
+                        Elige los asientos para tu función.
+                    </p>
+
+                </div>
+
+                <div class="pantalla-cine">
+
+                    <span>PANTALLA</span>
+
+                </div>
+
+                <div class="leyenda-asientos">
+
+                    <div class="elemento-leyenda">
+
+                        <span class="muestra disponible"></span>
+
+                        <span>Disponible</span>
+
+                    </div>
+
+                    <div class="elemento-leyenda">
+
+                        <span class="muestra seleccionado"></span>
+
+                        <span>Seleccionado</span>
+
+                    </div>
+
+                    <div class="elemento-leyenda">
+
+                        <span class="muestra ocupado"></span>
+
+                        <span>Ocupado</span>
+
+                    </div>
+
+                </div>
+
+                <div class="mapa-asientos">
+
+                    <div class="fila-asientos">
+
+                        <button type="button" class="asiento disponible">A1</button>
+                        <button type="button" class="asiento disponible">A2</button>
+                        <button type="button" class="asiento ocupado" disabled>A3</button>
+                        <button type="button" class="asiento disponible">A4</button>
+
+                        <span class="pasillo"></span>
+
+                        <button type="button" class="asiento disponible">A5</button>
+                        <button type="button" class="asiento disponible">A6</button>
+                        <button type="button" class="asiento disponible">A7</button>
+                        <button type="button" class="asiento disponible">A8</button>
+
+                    </div>
+
+                    <div class="fila-asientos">
+
+                        <button type="button" class="asiento disponible">B1</button>
+                        <button type="button" class="asiento disponible">B2</button>
+                        <button type="button" class="asiento disponible">B3</button>
+                        <button type="button" class="asiento disponible">B4</button>
+
+                        <span class="pasillo"></span>
+
+                        <button type="button" class="asiento disponible">B5</button>
+                        <button type="button" class="asiento disponible">B6</button>
+                        <button type="button" class="asiento disponible">B7</button>
+                        <button type="button" class="asiento disponible">B8</button>
+
+                    </div>
+
+                    <div class="fila-asientos">
+
+                        <button type="button" class="asiento disponible">C1</button>
+                        <button type="button" class="asiento ocupado" disabled>C2</button>
+                        <button type="button" class="asiento ocupado" disabled>C3</button>
+                        <button type="button" class="asiento disponible">C4</button>
+
+                        <span class="pasillo"></span>
+
+                        <button type="button" class="asiento disponible">C5</button>
+                        <button type="button" class="asiento disponible">C6</button>
+                        <button type="button" class="asiento ocupado" disabled>C7</button>
+                        <button type="button" class="asiento ocupado" disabled>C8</button>
+
+                    </div>
+
+                    <div class="fila-asientos">
+
+                        <button type="button" class="asiento disponible">D1</button>
+                        <button type="button" class="asiento disponible">D2</button>
+                        <button type="button" class="asiento disponible">D3</button>
+                        <button type="button" class="asiento disponible">D4</button>
+
+                        <span class="pasillo"></span>
+
+                        <button type="button" class="asiento disponible">D5</button>
+                        <button type="button" class="asiento disponible">D6</button>
+                        <button type="button" class="asiento disponible">D7</button>
+                        <button type="button" class="asiento disponible">D8</button>
+
+                    </div>
+
+                    <div class="fila-asientos">
+
+                        <button type="button" class="asiento disponible">E1</button>
+                        <button type="button" class="asiento disponible">E2</button>
+                        <button type="button" class="asiento disponible">E3</button>
+                        <button type="button" class="asiento disponible">E4</button>
+
+                        <span class="pasillo"></span>
+
+                        <button type="button" class="asiento disponible">E5</button>
+                        <button type="button" class="asiento disponible">E6</button>
+                        <button type="button" class="asiento disponible">E7</button>
+                        <button type="button" class="asiento disponible">E8</button>
+
+                    </div>
+
+                    <div class="fila-asientos">
+
+                        <button type="button" class="asiento disponible">F1</button>
+                        <button type="button" class="asiento disponible">F2</button>
+                        <button type="button" class="asiento disponible">F3</button>
+                        <button type="button" class="asiento disponible">F4</button>
+
+                        <span class="pasillo"></span>
+
+                        <button type="button" class="asiento disponible">F5</button>
+                        <button type="button" class="asiento disponible">F6</button>
+                        <button type="button" class="asiento disponible">F7</button>
+                        <button type="button" class="asiento disponible">F8</button>
+
+                    </div>
+
+                    <div class="fila-asientos">
+
+                        <button type="button" class="asiento disponible">G1</button>
+                        <button type="button" class="asiento disponible">G2</button>
+                        <button type="button" class="asiento disponible">G3</button>
+                        <button type="button" class="asiento disponible">G4</button>
+
+                        <span class="pasillo"></span>
+
+                        <button type="button" class="asiento disponible">G5</button>
+                        <button type="button" class="asiento disponible">G6</button>
+                        <button type="button" class="asiento disponible">G7</button>
+                        <button type="button" class="asiento disponible">G8</button>
+
+                    </div>
+
+                    <div class="fila-asientos">
+
+                        <button type="button" class="asiento disponible">H1</button>
+                        <button type="button" class="asiento disponible">H2</button>
+                        <button type="button" class="asiento disponible">H3</button>
+                        <button type="button" class="asiento disponible">H4</button>
+
+                        <span class="pasillo"></span>
+
+                        <button type="button" class="asiento disponible">H5</button>
+                        <button type="button" class="asiento disponible">H6</button>
+                        <button type="button" class="asiento disponible">H7</button>
+                        <button type="button" class="asiento disponible">H8</button>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+            <aside class="resumen-compra">
+
+                <div class="resumen-pelicula">
+
+                    <img src="img/comer-rezar-amar.jpeg" alt="Póster de la película" id="poster-asientos">
+
+                    <div class="datos-funcion">
+
+                        <h2 id="titulo-asientos">
+                            Comer, rezar y amar
+                        </h2>
+
+                        <p>
+                            <span id="fecha-asientos">Hoy</span>,
+                            <span id="hora-asientos">19:30</span> hrs
+                        </p>
+
+                        <p id="cine-asientos">
+                            CinemaHub Centro
+                        </p>
+
+                        <p id="sala-asientos">
+                            Sala Premium
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <hr>
+
+                <div class="asientos-elegidos">
+
+                    <h3>Asientos seleccionados</h3>
+
+                    <div class="lista-seleccionados" id="lista-seleccionados">
+                    </div>
+
+                </div>
+
+                <div class="detalle-precios">
+
+                    <div class="linea-precio">
+
+                        <span id="cantidad-entradas">0 × General</span>
+
+                        <span id="subtotal">Bs 0.00</span>
+
+                    </div>
+
+                    <div class="linea-precio">
+
+                        <span>Cargos por servicio</span>
+
+                        <span id="cargo-servicio">Bs 0.00</span>
+
+                    </div>
+
+                </div>
+
+                <hr>
+
+                <div class="total-compra">
+
+                    <span>Total</span>
+
+                    <strong id="total-compra">Bs 0.00</strong>
+
+                </div>
+
+                <a href="compra.html" class="boton-continuar deshabilitado" id="boton-continuar">
+
+                    Continuar al pago
+
+                    <span>→</span>
+
+                </a>
+
+            </aside>
+
+        </div>
+
+    </main>
+
+    <footer class="pie-pagina">
+
+        <div class="contenedor pie-contenido">
+
+            <a href="index.html" class="marca marca-pie">
+
+                <img src="img/logo.svg" alt="Logo de CinemaHub">
+
+                <span>CinemaHub</span>
+
+            </a>
+
+            <p class="derechos">
+                © 2026 CinemaHub. Todos los derechos reservados.
+            </p>
+
+        </div>
+
+    </footer>
+
+    <script src="js/datos.js"></script>
+    <script src="js/asientos.js"></script>
+</body>
+
+
+
+</html>

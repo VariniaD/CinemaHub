@@ -1,0 +1,330 @@
+/* CONTENIDO PRINCIPAL */
+
+.contenido-asientos {
+    padding-top: 48px;
+    padding-bottom: 80px;
+    background-color: #131313;
+}
+
+
+.distribucion-asientos {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 48px;
+    align-items: start;
+}
+
+
+/* PANEL DE ASIENTOS */
+
+.panel-asientos {
+    min-height: 656px;
+    padding: 48px;
+    background-color: rgba(31, 31, 31, 0.85);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    box-shadow:
+        0 20px 40px rgba(0, 0, 0, 0.50),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+
+.encabezado-seleccion {
+    margin-bottom: 56px;
+    text-align: center;
+}
+
+
+.encabezado-seleccion h1 {
+    margin-bottom: 8px;
+    color: #e5e2e1;
+    font-size: 28px;
+}
+
+
+.encabezado-seleccion p {
+    color: #e9bcb6;
+    font-size: 16px;
+}
+
+
+.pantalla-cine {
+    width: 70%;
+    height: 46px;
+    margin: 0 auto 20px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    color: #8e8e8e;
+    border-top: 5px solid #5a5a5a;
+    border-radius: 50%;
+    font-size: 11px;
+    letter-spacing: 4px;
+}
+
+
+.leyenda-asientos {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    margin-bottom: 48px;
+}
+
+
+.elemento-leyenda {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #e9bcb6;
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+}
+
+
+.muestra {
+    width: 16px;
+    height: 16px;
+    border-radius: 4px;
+}
+
+
+.muestra.disponible {
+    background-color: #2a2a2a;
+}
+
+
+.muestra.seleccionado {
+    background-color: #e50914;
+    box-shadow: 0 0 8px rgba(229, 9, 20, 0.50);
+}
+
+
+.muestra.ocupado {
+    background-color: #151515;
+    opacity: 0.35;
+}
+
+
+/* MAPA DE ASIENTOS */
+
+.mapa-asientos {
+    width: max-content;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+
+.fila-asientos {
+    display: grid;
+    grid-template-columns:
+        repeat(4, 36px)
+        24px
+        repeat(4, 36px);
+    gap: 8px;
+    align-items: center;
+}
+
+
+.asiento {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    border-radius: 6px;
+    font-size: 10px;
+    font-weight: bold;
+}
+
+
+.asiento.disponible {
+    background-color: #2a2a2a;
+    color: #e5e2e1;
+    cursor: pointer;
+}
+
+
+.asiento.disponible:hover {
+    background-color: #3b3b3b;
+    outline: 1px solid #e50914;
+}
+
+
+.asiento.seleccionado {
+    background-color: #e50914;
+    color: #fff7f6;
+    box-shadow: 0 0 10px rgba(229, 9, 20, 0.50);
+    cursor: pointer;
+}
+
+
+.asiento.ocupado {
+    background-color: #151515;
+    color: #4f4f4f;
+    opacity: 0.40;
+    cursor: not-allowed;
+}
+
+
+.pasillo {
+    width: 24px;
+    height: 1px;
+}
+
+
+/* RESUMEN DE COMPRA */
+
+.resumen-compra {
+    padding: 26px;
+    background-color: rgba(31, 31, 31, 0.85);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    box-shadow:
+        0 20px 40px rgba(0, 0, 0, 0.50),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+
+.resumen-pelicula {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+
+.resumen-pelicula img {
+    width: 86px;
+    height: 128px;
+    object-fit: cover;
+    border-radius: 6px;
+    border: 1px solid #353534;
+}
+
+
+.datos-funcion h2 {
+    margin-bottom: 10px;
+    color: #e5e2e1;
+    font-size: 19px;
+}
+
+
+.datos-funcion p {
+    margin-bottom: 6px;
+    color: #e9bcb6;
+    font-size: 14px;
+}
+
+
+.resumen-compra hr {
+    margin-top: 24px;
+    margin-bottom: 24px;
+    border: none;
+    border-top: 1px solid #474746;
+}
+
+
+.asientos-elegidos h3 {
+    margin-bottom: 12px;
+    color: #e9bcb6;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+
+.lista-seleccionados {
+    display: flex;
+    gap: 8px;
+}
+
+
+.lista-seleccionados span {
+    padding: 5px 12px;
+    background-color: #e50914;
+    color: #fff7f6;
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+
+.detalle-precios {
+    margin-top: 32px;
+}
+
+
+.linea-precio {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    color: #e9bcb6;
+    font-size: 16px;
+    border-bottom: 1px dashed #474746;
+}
+
+
+.total-compra {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 28px;
+    color: #e9bcb6;
+    font-size: 17px;
+}
+
+
+.total-compra strong {
+    color: #e50914;
+    font-size: 28px;
+}
+
+
+.boton-continuar {
+    width: 100%;
+    height: 52px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 14px;
+    background-color: #e50914;
+    color: #fff7f6;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    box-shadow: 0 8px 20px rgba(229, 9, 20, 0.30);
+}
+
+
+.boton-continuar:hover {
+    background-color: #c90812;
+}
+
+.boton-continuar.deshabilitado {
+    opacity: 0.45;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+/* AJUSTE PARA LAPTOPS PEQUEÑAS */
+
+@media screen and (max-width: 1100px) {
+
+    .distribucion-asientos {
+        grid-template-columns: 1fr;
+    }
+
+
+    .resumen-compra {
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+}

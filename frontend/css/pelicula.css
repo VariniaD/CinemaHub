@@ -1,0 +1,353 @@
+/* PRESENTACIÓN DE LA PELÍCULA */
+
+.presentacion-pelicula {
+    position: relative;
+    min-height: 716px;
+    display: flex;
+    align-items: flex-end;
+    overflow: hidden;
+    background-color: #131313;
+}
+
+
+.fondo-pelicula {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-image: url("../img/comer-rezar-amar-fondo.jpeg");
+    background-size: cover;
+    background-position: center;
+    opacity: 0.50;
+}
+
+
+.oscurecer-fondo {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: linear-gradient(
+        to bottom,
+        rgba(19, 19, 19, 0.20),
+        rgba(19, 19, 19, 0.75),
+        #131313
+    );
+}
+
+
+.detalle-pelicula {
+    position: relative;
+    z-index: 1;
+    min-height: 716px;
+    display: flex;
+    align-items: flex-end;
+    gap: 48px;
+    padding-bottom: 48px;
+}
+
+
+.contenedor-poster {
+    width: 256px;
+    flex-shrink: 0;
+}
+
+
+.poster-detalle {
+    width: 256px;
+    height: 456px;
+    object-fit: cover;
+    border: 1px solid #353534;
+    border-radius: 8px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.50);
+}
+
+
+.informacion-pelicula {
+    max-width: 760px;
+    padding-bottom: 48px;
+}
+
+
+.etiquetas-pelicula {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+
+.etiquetas-pelicula span {
+    padding: 5px 12px;
+    background-color: #353534;
+    color: #e9bcb6;
+    border: 1px solid #5e3f3b;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+}
+
+
+.informacion-pelicula h1 {
+    margin-bottom: 16px;
+    color: #e5e2e1;
+    font-size: 48px;
+    line-height: 1.1;
+    letter-spacing: -1px;
+}
+
+
+.sinopsis {
+    max-width: 680px;
+    margin-bottom: 20px;
+    color: #e9bcb6;
+    font-size: 18px;
+    line-height: 29px;
+}
+
+
+.datos-calificacion {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+
+.estrella-detalle {
+    color: #e50914;
+    font-size: 20px;
+}
+
+
+.datos-calificacion strong {
+    color: #e5e2e1;
+    font-size: 16px;
+}
+
+
+.cantidad-resenas {
+    color: #e9bcb6;
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+}
+
+
+/* SECCIÓN DE FUNCIONES */
+
+.seccion-funciones {
+    padding-top: 80px;
+    padding-bottom: 80px;
+    background-color: #131313;
+}
+
+
+.titulo-funciones {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 48px;
+}
+
+
+.icono-calendario {
+    color: #e50914;
+    font-size: 22px;
+}
+
+
+.titulo-funciones h2 {
+    color: #e5e2e1;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+
+.selector-fechas {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 48px;
+    overflow: auto;
+}
+
+
+.fecha {
+    width: 80px;
+    height: 72px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    background-color: rgba(32, 31, 31, 0.60);
+    color: #e9bcb6;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+
+.fecha:hover {
+    background-color: #353534;
+    color: #e5e2e1;
+}
+
+
+.fecha-activa {
+    background-color: #e50914;
+    color: #fff7f6;
+    border-color: #e50914;
+}
+
+
+.fecha-activa:hover {
+    background-color: #c90812;
+    color: #fff7f6;
+}
+
+
+.dia-semana {
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+}
+
+
+.numero-dia {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+
+/* TARJETAS DE CINE */
+
+.lista-cines {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+}
+
+
+.tarjeta-cine {
+    min-height: 174px;
+    padding: 24px;
+    background-color: rgba(32, 31, 31, 0.60);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+}
+
+
+.encabezado-cine {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 24px;
+    margin-bottom: 24px;
+}
+
+
+.encabezado-cine h3 {
+    margin-bottom: 4px;
+    color: #e5e2e1;
+    font-size: 18px;
+}
+
+
+.encabezado-cine p {
+    color: #e9bcb6;
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+}
+
+
+.tipo-sala {
+    padding: 5px 8px;
+    background-color: #353534;
+    color: #e9bcb6;
+    border: 1px solid #5e3f3b;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+
+.horarios-cine {
+    display: flex;
+    gap: 12px;
+}
+
+
+.horario {
+    min-width: 90px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #2a2a2a;
+    color: #e5e2e1;
+    border: 1px solid #353534;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+
+.horario:hover {
+    background-color: #353534;
+    border-color: #e50914;
+}
+
+.horario-agotado:hover {
+    background-color: #0e0e0e;
+    color: #5a5a5a;
+    border-color: #353534;
+}
+
+
+.horario-destacado {
+    background-color: rgba(229, 9, 20, 0.20);
+    border-color: #e50914;
+}
+
+
+.horario-agotado {
+    background-color: #0e0e0e;
+    color: #5a5a5a;
+    text-decoration: line-through;
+    opacity: 0.60;
+    cursor: not-allowed;
+}
+
+
+/* AJUSTE PARA LAPTOPS PEQUEÑAS */
+
+@media screen and (max-width: 1100px) {
+
+    .detalle-pelicula {
+        gap: 32px;
+    }
+
+
+    .informacion-pelicula h1 {
+        font-size: 40px;
+    }
+
+
+    .poster-detalle {
+        width: 220px;
+        height: 390px;
+    }
+
+
+    .contenedor-poster {
+        width: 220px;
+    }
+
+
+    .lista-cines {
+        grid-template-columns: 1fr;
+    }
+
+}

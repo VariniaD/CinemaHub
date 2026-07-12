@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CinemaHub - Cartelera</title>
+
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+
+    <header class="encabezado">
+
+        <div class="contenedor encabezado-contenido">
+
+            <a href="index.html" class="marca">
+
+                <img src="img/logo.svg" alt="Logo de CinemaHub">
+
+                <span>CinemaHub</span>
+
+            </a>
+
+            <nav class="menu-navegacion">
+
+                <ul>
+                    <li>
+                        <a href="index.html" class="enlace-activo">
+                            Cartelera
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="confirmacion.html">
+                            Mi Ticket
+                        </a>
+                    </li>
+                </ul>
+
+            </nav>
+
+        </div>
+
+    </header>
+
+    <main class="contenido-principal">
+
+        <section class="encabezado-cartelera contenedor">
+
+            <div class="texto-cartelera">
+
+                <h1>En Cartelera</h1>
+
+                <p>
+                    Las películas más esperadas del momento,
+                    en la mejor calidad.
+                </p>
+
+            </div>
+
+            <div class="filtros-cartelera">
+
+                <button type="button" class="filtro-activo" id="filtro-hoy">
+
+                    Hoy
+
+                </button>
+
+                <button type="button" id="filtro-proximos">
+
+                    Próximos Estrenos
+
+                </button>
+
+            </div>
+
+        </section>
+
+        <section class="cartelera contenedor">
+
+            <article class="tarjeta-pelicula">
+
+                <img src="img/comer-rezar-amar.jpeg" alt="Póster de la película Comer, rezar y amar"
+                    class="poster-pelicula">
+
+                <div class="calificacion">
+                    <span class="estrella">★</span>
+                    <span>8.9</span>
+                </div>
+
+                <div class="acciones-pelicula">
+
+                    <a href="asientos.html" class="boton boton-asientos" data-id="1">
+
+                        <span>▣</span>
+                        Asientos
+
+                    </a>
+
+                    <a href="pelicula.html?id=1" class="boton boton-detalles">
+                        <span>ⓘ</span>
+                        Detalles
+                    </a>
+
+                </div>
+
+            </article>
+
+            <article class="tarjeta-pelicula">
+
+                <img src="img/dune2.jpeg" alt="Póster de la película Dune Parte Dos" class="poster-pelicula">
+
+                <div class="calificacion">
+                    <span class="estrella">★</span>
+                    <span>9.1</span>
+                </div>
+
+                <div class="acciones-pelicula">
+
+                    <a href="asientos.html" class="boton boton-asientos" data-id="2">
+                        <span>▣</span>
+                        Asientos
+                    </a>
+
+                    <a href="pelicula.html?id=2" class="boton boton-detalles">
+                        <span>ⓘ</span>
+                        Detalles
+                    </a>
+
+                </div>
+
+            </article>
+
+            <article class="tarjeta-pelicula">
+
+                <img src="img/juegos-del-hambre.jpeg" alt="Póster de la película Los Juegos del Hambre"
+                    class="poster-pelicula">
+
+                <div class="calificacion">
+                    <span class="estrella">★</span>
+                    <span>7.5</span>
+                </div>
+
+                <div class="acciones-pelicula">
+
+                    <a href="asientos.html" class="boton boton-asientos" data-id="3">
+                        <span>▣</span>
+                        Asientos
+                    </a>
+
+                    <a href="pelicula.html?id=3" class="boton boton-detalles">
+                        <span>ⓘ</span>
+                        Detalles
+                    </a>
+
+                </div>
+
+            </article>
+
+            <article class="tarjeta-pelicula">
+
+                <img src="img/minion.jpeg" alt="Póster de la película Minions" class="poster-pelicula">
+
+                <div class="calificacion">
+                    <span class="estrella">★</span>
+                    <span>8.6</span>
+                </div>
+
+                <div class="acciones-pelicula">
+
+                    <a href="asientos.html" class="boton boton-asientos" data-id="4">
+                        <span>▣</span>
+                        Asientos
+                    </a>
+
+                    <a href="pelicula.html?id=4" class="boton boton-detalles">
+                        <span>ⓘ</span>
+                        Detalles
+                    </a>
+
+                </div>
+
+            </article>
+
+            <article class="tarjeta-pelicula">
+
+                <img src="img/proyectox.jpeg" alt="Póster de la película Proyecto X" class="poster-pelicula">
+
+                <div class="calificacion">
+                    <span class="estrella">★</span>
+                    <span>9.0</span>
+                </div>
+
+                <div class="acciones-pelicula">
+
+                    <a href="asientos.html" class="boton boton-asientos" data-id="5">
+                        <span>▣</span>
+                        Asientos
+                    </a>
+
+                    <a href="pelicula.html?id=5" class="boton boton-detalles">
+                        <span>ⓘ</span>
+                        Detalles
+                    </a>
+
+                </div>
+
+            </article>
+
+            <article class="tarjeta-proximamente">
+
+                <div class="contenido-proximamente">
+
+                    <span class="icono-proximamente">＋</span>
+
+                    <p>Más películas próximamente</p>
+
+                </div>
+
+            </article>
+
+        </section>
+
+    </main>
+
+    <footer class="pie-pagina">
+
+        <div class="contenedor pie-contenido">
+
+            <a href="index.html" class="marca marca-pie">
+
+                <img src="img/logo.svg" alt="Logo de CinemaHub">
+
+                <span>CinemaHub</span>
+
+            </a>
+
+            <p class="derechos">
+                © 2026 CinemaHub. Todos los derechos reservados.
+            </p>
+
+        </div>
+
+    </footer>
+
+</body>
+
+</html>
