@@ -10,6 +10,9 @@ const Sala =
 const Funcion =
     require("./Funcion");
 
+const Asiento =
+    require("./Asiento");
+
 
 // RELACIÓN ENTRE CINE Y SALA
 
@@ -71,11 +74,32 @@ Funcion.belongsTo(
 );
 
 
+// RELACIÓN ENTRE FUNCIÓN Y ASIENTO
+
+Funcion.hasMany(
+    Asiento,
+    {
+        foreignKey: "funcionId",
+        as: "asientos"
+    }
+);
+
+
+Asiento.belongsTo(
+    Funcion,
+    {
+        foreignKey: "funcionId",
+        as: "funcion"
+    }
+);
+
+
 // EXPORTA TODOS LOS MODELOS
 
 module.exports = {
     Pelicula,
     Cine,
     Sala,
-    Funcion
+    Funcion,
+    Asiento
 };

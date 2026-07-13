@@ -139,3 +139,44 @@ async function obtenerFuncionesApi(
         return [];
     }
 }
+
+// OBTIENE LOS ASIENTOS DE UNA FUNCIÓN
+
+async function obtenerAsientosApi(funcionId) {
+
+    try {
+
+        const respuesta =
+            await fetch(
+                API_URL +
+                "/funciones/" +
+                funcionId +
+                "/asientos"
+            );
+
+
+        if (!respuesta.ok) {
+
+            throw new Error(
+                "No se pudieron obtener los asientos"
+            );
+        }
+
+
+        const datos =
+            await respuesta.json();
+
+
+        return datos;
+
+    } catch (error) {
+
+        console.error(
+            "Error al consultar los asientos:",
+            error
+        );
+
+
+        return null;
+    }
+}

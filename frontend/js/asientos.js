@@ -1,71 +1,18 @@
-// OBTIENE LOS DATOS ENVIADOS DESDE LA PÁGINA ANTERIOR
+// OBTIENE LOS PARÁMETROS DE LA URL
 
 const parametros =
-    new URLSearchParams(window.location.search);
+    new URLSearchParams(
+        window.location.search
+    );
 
-let funcionId =
+
+// OBTIENE EL IDENTIFICADOR DE LA FUNCIÓN
+
+const funcionId =
     parametros.get("funcionId");
 
-// GUARDA LOS DATOS DE LA FUNCIÓN
 
-let peliculaId =
-    parametros.get("id");
-
-let cineSeleccionado =
-    parametros.get("cine");
-
-let salaSeleccionada =
-    parametros.get("sala");
-
-let horaSeleccionada =
-    parametros.get("hora");
-
-let fechaSeleccionada =
-    parametros.get("fecha");
-
-
-// COLOCA VALORES BÁSICOS SI NO LLEGA ALGÚN DATO
-
-if (!peliculaId) {
-    peliculaId = "1";
-}
-
-if (!cineSeleccionado) {
-    cineSeleccionado = "centro";
-}
-
-if (!salaSeleccionada) {
-    salaSeleccionada = "Sala Premium";
-}
-
-if (!horaSeleccionada) {
-    horaSeleccionada = "19:30";
-}
-
-if (!fechaSeleccionada) {
-
-    const fechaActual = new Date();
-
-    const anio = fechaActual.getFullYear();
-
-    const mes =
-        String(fechaActual.getMonth() + 1).padStart(2, "0");
-
-    const dia =
-        String(fechaActual.getDate()).padStart(2, "0");
-
-    fechaSeleccionada =
-        anio + "-" + mes + "-" + dia;
-}
-
-
-// BUSCA LA PELÍCULA
-
-const pelicula =
-    buscarPelicula(peliculaId);
-
-
-// PRECIO DE CADA ASIENTO
+// PRECIO DE UNA ENTRADA
 
 const precioEntrada = 24;
 
@@ -75,45 +22,121 @@ const precioEntrada = 24;
 const cargoServicio = 5;
 
 
-// BUSCA LOS DATOS DE LA PELÍCULA EN EL RESUMEN
+// GUARDA LOS DATOS DE LA FUNCIÓN
+
+let peliculaId = "";
+
+let cineSeleccionado = "";
+
+let salaSeleccionada = "";
+
+let horaSeleccionada = "";
+
+let fechaSeleccionada = "";
+
+
+// GUARDA LOS ASIENTOS SELECCIONADOS
+
+let asientosSeleccionados = [];
+
+
+// BUSCA LOS ELEMENTOS DEL MAPA
+
+const mapaAsientos =
+    document.getElementById(
+        "mapa-asientos"
+    );
+
+const mensajeCargando =
+    document.getElementById(
+        "mensaje-cargando-asientos"
+    );
+
+const mensajeError =
+    document.getElementById(
+        "mensaje-error-asientos"
+    );
+
+
+// BUSCA LOS DATOS DEL RESUMEN
 
 const posterAsientos =
-    document.getElementById("poster-asientos");
+    document.getElementById(
+        "poster-asientos"
+    );
 
 const tituloAsientos =
-    document.getElementById("titulo-asientos");
+    document.getElementById(
+        "titulo-asientos"
+    );
 
 const fechaAsientos =
-    document.getElementById("fecha-asientos");
+    document.getElementById(
+        "fecha-asientos"
+    );
 
 const horaAsientos =
-    document.getElementById("hora-asientos");
+    document.getElementById(
+        "hora-asientos"
+    );
 
 const cineAsientos =
-    document.getElementById("cine-asientos");
+    document.getElementById(
+        "cine-asientos"
+    );
 
 const salaAsientos =
-    document.getElementById("sala-asientos");
+    document.getElementById(
+        "sala-asientos"
+    );
 
 
-// MUESTRA LA PELÍCULA
+// BUSCA LOS ELEMENTOS DEL PRECIO
 
-posterAsientos.src =
-    pelicula.imagen;
+const listaSeleccionados =
+    document.getElementById(
+        "lista-seleccionados"
+    );
 
-posterAsientos.alt =
-    "Póster de la película " + pelicula.titulo;
+const cantidadEntradas =
+    document.getElementById(
+        "cantidad-entradas"
+    );
 
-tituloAsientos.textContent =
-    pelicula.titulo;
+const subtotalTexto =
+    document.getElementById(
+        "subtotal"
+    );
+
+const cargoServicioTexto =
+    document.getElementById(
+        "cargo-servicio"
+    );
+
+const totalCompraTexto =
+    document.getElementById(
+        "total-compra"
+    );
+
+const botonContinuar =
+    document.getElementById(
+        "boton-continuar"
+    );
 
 
 // CONVIERTE LA FECHA A UN TEXTO MÁS CLARO
 
 function formatearFecha(fechaTexto) {
 
+    if (!fechaTexto) {
+
+        return "";
+    }
+
+
     const partes =
         fechaTexto.split("-");
+
 
     const fecha =
         new Date(
@@ -121,6 +144,7 @@ function formatearFecha(fechaTexto) {
             Number(partes[1]) - 1,
             Number(partes[2])
         );
+
 
     return fecha.toLocaleDateString(
         "es-BO",
@@ -133,110 +157,342 @@ function formatearFecha(fechaTexto) {
 }
 
 
-// MUESTRA LOS DATOS DE LA FUNCIÓN
+// FORMATEA LA HORA
 
-fechaAsientos.textContent =
-    formatearFecha(fechaSeleccionada);
+function formatearHora(horaTexto) {
 
-horaAsientos.textContent =
-    horaSeleccionada;
+    if (!horaTexto) {
 
-salaAsientos.textContent =
-    salaSeleccionada;
+        return "";
+    }
 
 
-// MUESTRA EL NOMBRE DEL CINE
-
-if (cineSeleccionado === "norte") {
-
-    cineAsientos.textContent =
-        "CinemaHub Norte";
-
-} else {
-
-    cineAsientos.textContent =
-        "CinemaHub Centro";
+    return horaTexto.substring(
+        0,
+        5
+    );
 }
 
 
-// BUSCA TODOS LOS ASIENTOS DISPONIBLES
+// MUESTRA LOS DATOS DE LA FUNCIÓN
 
-const asientosDisponibles =
-    document.querySelectorAll(".asiento.disponible");
+function mostrarDatosFuncion(funcion) {
 
+    peliculaId =
+        String(
+            funcion.pelicula.id
+        );
 
-// BUSCA LOS ELEMENTOS DEL RESUMEN
+    cineSeleccionado =
+        funcion.sala.cine.codigo;
 
-const listaSeleccionados =
-    document.getElementById("lista-seleccionados");
+    salaSeleccionada =
+        funcion.sala.nombre;
 
-const cantidadEntradas =
-    document.getElementById("cantidad-entradas");
+    horaSeleccionada =
+        formatearHora(
+            funcion.hora
+        );
 
-const subtotalTexto =
-    document.getElementById("subtotal");
-
-const cargoServicioTexto =
-    document.getElementById("cargo-servicio");
-
-const totalCompraTexto =
-    document.getElementById("total-compra");
-
-const botonContinuar =
-    document.getElementById("boton-continuar");
+    fechaSeleccionada =
+        funcion.fecha;
 
 
-// GUARDA LOS ASIENTOS ELEGIDOS
+    posterAsientos.src =
+        funcion.pelicula.imagen;
 
-let asientosSeleccionados = [];
-
-
-// RECORRE TODOS LOS ASIENTOS DISPONIBLES
-
-asientosDisponibles.forEach(function (asiento) {
-
-    asiento.addEventListener("click", function () {
-
-        // Obtiene el nombre del asiento
-        const nombreAsiento =
-            asiento.textContent.trim();
+    posterAsientos.alt =
+        "Póster de la película " +
+        funcion.pelicula.titulo;
 
 
-        // Si ya estaba seleccionado, lo elimina
-        if (asiento.classList.contains("seleccionado")) {
-
-            asiento.classList.remove("seleccionado");
-
-            asiento.classList.add("disponible");
+    tituloAsientos.textContent =
+        funcion.pelicula.titulo;
 
 
-            const posicion =
-                asientosSeleccionados.indexOf(nombreAsiento);
+    fechaAsientos.textContent =
+        formatearFecha(
+            funcion.fecha
+        );
 
 
-            if (posicion !== -1) {
+    horaAsientos.textContent =
+        horaSeleccionada;
 
-                asientosSeleccionados.splice(
-                    posicion,
-                    1
+
+    cineAsientos.textContent =
+        funcion.sala.cine.nombre;
+
+
+    salaAsientos.textContent =
+        funcion.sala.nombre;
+
+
+    document.title =
+        "CinemaHub - " +
+        funcion.pelicula.titulo;
+}
+
+
+// CREA UN BOTÓN DE ASIENTO
+
+function crearBotonAsiento(asiento) {
+
+    const boton =
+        document.createElement(
+            "button"
+        );
+
+
+    boton.type =
+        "button";
+
+
+    boton.classList.add(
+        "asiento"
+    );
+
+
+    boton.textContent =
+        asiento.codigo;
+
+
+    boton.dataset.id =
+        asiento.id;
+
+    boton.dataset.codigo =
+        asiento.codigo;
+
+
+    if (
+        asiento.estado ===
+        "ocupado"
+    ) {
+
+        boton.classList.add(
+            "ocupado"
+        );
+
+        boton.disabled =
+            true;
+
+    } else {
+
+        boton.classList.add(
+            "disponible"
+        );
+
+
+        boton.addEventListener(
+            "click",
+            function () {
+
+                seleccionarAsiento(
+                    boton
                 );
             }
+        );
+    }
 
-        } else {
 
-            // Si estaba disponible, lo selecciona
-            asiento.classList.remove("disponible");
+    return boton;
+}
 
-            asiento.classList.add("seleccionado");
 
-            asientosSeleccionados.push(nombreAsiento);
+// CREA UNA FILA DE ASIENTOS
+
+function crearFilaAsientos(asientosFila) {
+
+    const fila =
+        document.createElement(
+            "div"
+        );
+
+
+    fila.classList.add(
+        "fila-asientos"
+    );
+
+
+    asientosFila.forEach(
+        function (
+            asiento,
+            posicion
+        ) {
+
+            const boton =
+                crearBotonAsiento(
+                    asiento
+                );
+
+
+            fila.appendChild(
+                boton
+            );
+
+
+            // AGREGA EL PASILLO DESPUÉS DEL CUARTO ASIENTO
+
+            if (posicion === 3) {
+
+                const pasillo =
+                    document.createElement(
+                        "span"
+                    );
+
+
+                pasillo.classList.add(
+                    "pasillo"
+                );
+
+
+                fila.appendChild(
+                    pasillo
+                );
+            }
+        }
+    );
+
+
+    return fila;
+}
+
+
+// AGRUPA Y MUESTRA LOS ASIENTOS POR FILA
+
+function mostrarAsientos(asientos) {
+
+    mapaAsientos.innerHTML =
+        "";
+
+
+    const asientosPorFila =
+        {};
+
+
+    asientos.forEach(
+        function (asiento) {
+
+            if (
+                !asientosPorFila[
+                    asiento.fila
+                ]
+            ) {
+
+                asientosPorFila[
+                    asiento.fila
+                ] = [];
+            }
+
+
+            asientosPorFila[
+                asiento.fila
+            ].push(
+                asiento
+            );
+        }
+    );
+
+
+    const filas =
+        Object.keys(
+            asientosPorFila
+        ).sort();
+
+
+    filas.forEach(
+        function (nombreFila) {
+
+            const asientosFila =
+                asientosPorFila[
+                    nombreFila
+                ];
+
+
+            asientosFila.sort(
+                function (
+                    asientoA,
+                    asientoB
+                ) {
+
+                    return (
+                        asientoA.numero -
+                        asientoB.numero
+                    );
+                }
+            );
+
+
+            const fila =
+                crearFilaAsientos(
+                    asientosFila
+                );
+
+
+            mapaAsientos.appendChild(
+                fila
+            );
+        }
+    );
+}
+
+
+// SELECCIONA O QUITA UN ASIENTO
+
+function seleccionarAsiento(boton) {
+
+    const codigoAsiento =
+        boton.dataset.codigo;
+
+
+    if (
+        boton.classList.contains(
+            "seleccionado"
+        )
+    ) {
+
+        boton.classList.remove(
+            "seleccionado"
+        );
+
+        boton.classList.add(
+            "disponible"
+        );
+
+
+        const posicion =
+            asientosSeleccionados.indexOf(
+                codigoAsiento
+            );
+
+
+        if (posicion !== -1) {
+
+            asientosSeleccionados.splice(
+                posicion,
+                1
+            );
         }
 
+    } else {
 
-        // Actualiza el resumen
-        actualizarResumen();
-    });
-});
+        boton.classList.remove(
+            "disponible"
+        );
+
+        boton.classList.add(
+            "seleccionado"
+        );
+
+
+        asientosSeleccionados.push(
+            codigoAsiento
+        );
+    }
+
+
+    actualizarResumen();
+}
 
 
 // ACTUALIZA LOS DATOS DEL RESUMEN
@@ -246,62 +502,83 @@ function actualizarResumen() {
     const cantidad =
         asientosSeleccionados.length;
 
+
     const subtotal =
-        cantidad * precioEntrada;
+        cantidad *
+        precioEntrada;
 
 
     let servicio = 0;
 
+
     if (cantidad > 0) {
-        servicio = cargoServicio;
+
+        servicio =
+            cargoServicio;
     }
 
 
     const total =
-        subtotal + servicio;
+        subtotal +
+        servicio;
 
 
     cantidadEntradas.textContent =
-        cantidad + " × General";
+        cantidad +
+        " × General";
+
 
     subtotalTexto.textContent =
-        "Bs " + subtotal.toFixed(2);
+        "Bs " +
+        subtotal.toFixed(2);
+
 
     cargoServicioTexto.textContent =
-        "Bs " + servicio.toFixed(2);
+        "Bs " +
+        servicio.toFixed(2);
+
 
     totalCompraTexto.textContent =
-        "Bs " + total.toFixed(2);
+        "Bs " +
+        total.toFixed(2);
 
 
-    // Limpia los asientos mostrados anteriormente
-    listaSeleccionados.innerHTML = "";
+    listaSeleccionados.innerHTML =
+        "";
 
 
-    // Muestra cada asiento seleccionado
-    asientosSeleccionados.forEach(function (nombreAsiento) {
+    asientosSeleccionados.forEach(
+        function (codigoAsiento) {
 
-        const asientoTexto =
-            document.createElement("span");
+            const asientoTexto =
+                document.createElement(
+                    "span"
+                );
 
-        asientoTexto.textContent =
-            nombreAsiento;
 
-        listaSeleccionados.appendChild(
-            asientoTexto
-        );
-    });
+            asientoTexto.textContent =
+                codigoAsiento;
+
+
+            listaSeleccionados.appendChild(
+                asientoTexto
+            );
+        }
+    );
 
 
     actualizarBoton();
 }
 
 
-// HABILITA O DESHABILITA EL BOTÓN
+// HABILITA O DESHABILITA EL BOTÓN DE COMPRA
 
 function actualizarBoton() {
 
-    if (asientosSeleccionados.length > 0) {
+    if (
+        asientosSeleccionados.length >
+        0
+    ) {
 
         botonContinuar.classList.remove(
             "deshabilitado"
@@ -309,16 +586,20 @@ function actualizarBoton() {
 
 
         const asientosTexto =
-            asientosSeleccionados.join("-");
+            asientosSeleccionados.join(
+                "-"
+            );
 
 
         botonContinuar.href =
             "compra.html?funcionId=" +
             encodeURIComponent(
-                funcionId || ""
+                funcionId
             ) +
             "&id=" +
-            peliculaId +
+            encodeURIComponent(
+                peliculaId
+            ) +
             "&cine=" +
             encodeURIComponent(
                 cineSeleccionado
@@ -346,12 +627,105 @@ function actualizarBoton() {
             "deshabilitado"
         );
 
+
         botonContinuar.href =
             "compra.html";
     }
 }
 
 
-// MUESTRA EL ESTADO INICIAL
+// MUESTRA UN ERROR
+
+function mostrarError() {
+
+    mensajeCargando.style.display =
+        "none";
+
+
+    mapaAsientos.style.display =
+        "none";
+
+
+    mensajeError.style.display =
+        "block";
+
+
+    botonContinuar.classList.add(
+        "deshabilitado"
+    );
+}
+
+
+// CARGA LOS ASIENTOS DESDE LA API
+
+async function cargarAsientos() {
+
+    mensajeCargando.style.display =
+        "block";
+
+
+    mensajeError.style.display =
+        "none";
+
+
+    mapaAsientos.style.display =
+        "none";
+
+
+    // DEBE EXISTIR UN ID DE FUNCIÓN
+
+    if (!funcionId) {
+
+        console.error(
+            "No se recibió funcionId"
+        );
+
+
+        mostrarError();
+
+        return;
+    }
+
+
+    const datos =
+        await obtenerAsientosApi(
+            funcionId
+        );
+
+
+    if (
+        !datos ||
+        !datos.funcion ||
+        !datos.asientos
+    ) {
+
+        mostrarError();
+
+        return;
+    }
+
+
+    mostrarDatosFuncion(
+        datos.funcion
+    );
+
+
+    mostrarAsientos(
+        datos.asientos
+    );
+
+
+    mensajeCargando.style.display =
+        "none";
+
+
+    mapaAsientos.style.display =
+        "flex";
+}
+
+
+// INICIA LA PÁGINA
 
 actualizarResumen();
+
+cargarAsientos();

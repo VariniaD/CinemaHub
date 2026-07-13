@@ -7,7 +7,8 @@ const {
     Pelicula,
     Cine,
     Sala,
-    Funcion
+    Funcion,
+    Asiento
 } = require("../models");
 
 const peliculasIniciales =
@@ -21,6 +22,9 @@ const salasIniciales =
 
 const funcionesIniciales =
     require("./funcionesIniciales");
+
+const generarAsientos =
+    require("./generarAsientos");
 
 
 // OBTIENE UNA FECHA SUMANDO DÍAS A LA FECHA ACTUAL
@@ -325,6 +329,61 @@ async function cargarDatos() {
             );
         }
 
+        // CARGA LOS ASIENTOS DE TODAS LAS FUNCIONES
+
+        const cantidadAsientos =
+            await Asiento.count();
+
+
+        if (cantidadAsientos === 0) {
+
+            // BUSCA TODAS LAS FUNCIONES
+
+            const funciones =
+                await Funcion.findAll();
+
+
+            // RECORRE CADA FUNCIÓN
+
+            for (
+                let i = 0;
+                i < funciones.length;
+                i++
+            ) {
+
+                const funcion =
+                    funciones[i];
+
+
+                // GENERA LOS 64 ASIENTOS
+
+                const asientosFuncion =
+                    generarAsientos(
+                        funcion.id
+                    );
+
+
+                // INSERTA LOS ASIENTOS
+
+                await Asiento.bulkCreate(
+                    asientosFuncion,
+                    {
+                        validate: true
+                    }
+                );
+            }
+
+
+            console.log(
+                "Asientos cargados correctamente"
+            );
+
+        } else {
+
+            console.log(
+                "Los asientos ya existen"
+            );
+        }
 
         console.log(
             "Carga inicial finalizada correctamente"
