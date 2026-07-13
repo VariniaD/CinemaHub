@@ -1,4 +1,4 @@
-// OBTIENE LOS PARÁMETROS DE LA DIRECCIÓN
+// OBTIENE LOS PARÁMETROS DE LA URL
 
 const parametros =
     new URLSearchParams(window.location.search);
@@ -6,84 +6,132 @@ const parametros =
 
 // OBTIENE EL ID DE LA PELÍCULA
 
-let peliculaId = parametros.get("id");
+let peliculaId =
+    parametros.get("id");
 
-
-// UTILIZA LA PELÍCULA 1 SI NO LLEGA UN ID
 
 if (!peliculaId) {
     peliculaId = "1";
 }
 
 
-// BUSCA LA PELÍCULA DENTRO DE datos.js
+// CARGA LOS DATOS DE LA PELÍCULA
 
-const pelicula = buscarPelicula(peliculaId);
+async function cargarPelicula() {
 
+    // INTENTA OBTENER LA PELÍCULA DESDE EL BACKEND
 
-// BUSCA LOS ELEMENTOS DEL DETALLE
-
-const fondoPelicula =
-    document.getElementById("fondo-pelicula");
-
-const posterDetalle =
-    document.getElementById("poster-detalle");
-
-const generoPelicula =
-    document.getElementById("genero-pelicula");
-
-const duracionPelicula =
-    document.getElementById("duracion-pelicula");
-
-const clasificacionPelicula =
-    document.getElementById("clasificacion-pelicula");
-
-const tituloPelicula =
-    document.getElementById("titulo-pelicula");
-
-const sinopsisPelicula =
-    document.getElementById("sinopsis-pelicula");
-
-const calificacionPelicula =
-    document.getElementById("calificacion-pelicula");
-
-const resenasPelicula =
-    document.getElementById("resenas-pelicula");
+    let pelicula =
+        await obtenerPeliculaPorIdApi(
+            peliculaId
+        );
 
 
-// MUESTRA LOS DATOS DE LA PELÍCULA
+    // SI EL BACKEND FALLA, USA LOS DATOS LOCALES
 
-document.title =
-    "CinemaHub - " + pelicula.titulo;
+    if (!pelicula) {
 
-fondoPelicula.style.backgroundImage =
-    "url('" + pelicula.imagen + "')";
+        pelicula =
+            buscarPelicula(
+                peliculaId
+            );
+    }
 
-posterDetalle.src = pelicula.imagen;
 
-posterDetalle.alt =
-    "Póster de la película " + pelicula.titulo;
+    // BUSCA LOS ELEMENTOS DEL DETALLE
 
-generoPelicula.textContent =
-    pelicula.genero;
+    const fondoPelicula =
+        document.getElementById(
+            "fondo-pelicula"
+        );
 
-duracionPelicula.textContent =
-    pelicula.duracion;
+    const posterDetalle =
+        document.getElementById(
+            "poster-detalle"
+        );
 
-clasificacionPelicula.textContent =
-    pelicula.clasificacion;
+    const generoPelicula =
+        document.getElementById(
+            "genero-pelicula"
+        );
 
-tituloPelicula.textContent =
-    pelicula.titulo;
+    const duracionPelicula =
+        document.getElementById(
+            "duracion-pelicula"
+        );
 
-sinopsisPelicula.textContent =
-    pelicula.sinopsis;
+    const clasificacionPelicula =
+        document.getElementById(
+            "clasificacion-pelicula"
+        );
 
-calificacionPelicula.textContent =
-    pelicula.calificacion;
+    const tituloPelicula =
+        document.getElementById(
+            "titulo-pelicula"
+        );
 
-resenasPelicula.textContent =
-    pelicula.resenas;
+    const sinopsisPelicula =
+        document.getElementById(
+            "sinopsis-pelicula"
+        );
+
+    const calificacionPelicula =
+        document.getElementById(
+            "calificacion-pelicula"
+        );
+
+    const resenasPelicula =
+        document.getElementById(
+            "resenas-pelicula"
+        );
+
+
+    // MUESTRA LOS DATOS
+
+    document.title =
+        "CinemaHub - " +
+        pelicula.titulo;
+
+    fondoPelicula.style.backgroundImage =
+        "url('" +
+        pelicula.imagen +
+        "')";
+
+    posterDetalle.src =
+        pelicula.imagen;
+
+    posterDetalle.alt =
+        "Póster de la película " +
+        pelicula.titulo;
+
+    generoPelicula.textContent =
+        pelicula.genero;
+
+    duracionPelicula.textContent =
+        pelicula.duracion +
+        " min";
+
+    clasificacionPelicula.textContent =
+        pelicula.clasificacion;
+
+    tituloPelicula.textContent =
+        pelicula.titulo;
+
+    sinopsisPelicula.textContent =
+        pelicula.sinopsis;
+
+    calificacionPelicula.textContent =
+        pelicula.calificacion;
+
+    resenasPelicula.textContent =
+        pelicula.resenas +
+        " reseñas";
+}
+
+
+// EJECUTA LA CARGA
+
+cargarPelicula();
 
 
 // BUSCA LOS BOTONES DE FECHA
@@ -91,13 +139,7 @@ resenasPelicula.textContent =
 const botonesFecha =
     document.querySelectorAll(".fecha");
 
-
-// GUARDA LA FECHA SELECCIONADA
-
 let fechaSeleccionada = "";
-
-
-// NOMBRES ABREVIADOS DE LOS DÍAS
 
 const diasSemana = [
     "DOM",
@@ -110,122 +152,153 @@ const diasSemana = [
 ];
 
 
-// PREPARA LAS SIETE FECHAS A PARTIR DE HOY
+// PREPARA LAS FECHAS
 
-botonesFecha.forEach(function (boton, posicion) {
+botonesFecha.forEach(
+    function (boton, posicion) {
 
-    // Crea una fecha tomando hoy como inicio
-    const fecha = new Date();
+        const fecha =
+            new Date();
 
-    // Suma la posición del botón
-    fecha.setDate(fecha.getDate() + posicion);
-
-
-    // Obtiene las partes de la fecha
-    const anio = fecha.getFullYear();
-
-    const mes =
-        String(fecha.getMonth() + 1).padStart(2, "0");
-
-    const dia =
-        String(fecha.getDate()).padStart(2, "0");
+        fecha.setDate(
+            fecha.getDate() +
+            posicion
+        );
 
 
-    // Forma el valor que viajará por la URL
-    const fechaValor =
-        anio + "-" + mes + "-" + dia;
+        const anio =
+            fecha.getFullYear();
+
+        const mes =
+            String(
+                fecha.getMonth() + 1
+            ).padStart(2, "0");
+
+        const dia =
+            String(
+                fecha.getDate()
+            ).padStart(2, "0");
 
 
-    // Guarda la fecha dentro del botón
-    boton.dataset.fecha = fechaValor;
+        const fechaValor =
+            anio +
+            "-" +
+            mes +
+            "-" +
+            dia;
 
 
-    // Busca los textos internos
-    const textoDia =
-        boton.querySelector(".dia-semana");
-
-    const numeroDia =
-        boton.querySelector(".numero-dia");
+        boton.dataset.fecha =
+            fechaValor;
 
 
-    // El primer botón muestra HOY
-    if (posicion === 0) {
+        const textoDia =
+            boton.querySelector(
+                ".dia-semana"
+            );
 
-        textoDia.textContent = "HOY";
+        const numeroDia =
+            boton.querySelector(
+                ".numero-dia"
+            );
 
-        fechaSeleccionada = fechaValor;
 
-    } else {
+        if (posicion === 0) {
 
-        textoDia.textContent =
-            diasSemana[fecha.getDay()];
+            textoDia.textContent =
+                "HOY";
+
+            fechaSeleccionada =
+                fechaValor;
+
+        } else {
+
+            textoDia.textContent =
+                diasSemana[
+                    fecha.getDay()
+                ];
+        }
+
+
+        numeroDia.textContent =
+            fecha.getDate();
+
+
+        boton.addEventListener(
+            "click",
+            function () {
+
+                botonesFecha.forEach(
+                    function (otraFecha) {
+
+                        otraFecha.classList.remove(
+                            "fecha-activa"
+                        );
+                    }
+                );
+
+
+                boton.classList.add(
+                    "fecha-activa"
+                );
+
+
+                fechaSeleccionada =
+                    boton.dataset.fecha;
+            }
+        );
     }
+);
 
 
-    // Muestra el número del día
-    numeroDia.textContent =
-        fecha.getDate();
-
-
-    // Detecta cuando se selecciona otra fecha
-    boton.addEventListener("click", function () {
-
-        // Quita la clase activa de todas las fechas
-        botonesFecha.forEach(function (otraFecha) {
-            otraFecha.classList.remove("fecha-activa");
-        });
-
-
-        // Activa la fecha presionada
-        boton.classList.add("fecha-activa");
-
-
-        // Guarda la nueva fecha
-        fechaSeleccionada =
-            boton.dataset.fecha;
-    });
-});
-
-
-// BUSCA TODOS LOS HORARIOS DISPONIBLES
+// BUSCA LOS HORARIOS
 
 const horarios =
-    document.querySelectorAll(".horario-funcion");
+    document.querySelectorAll(
+        ".horario-funcion"
+    );
 
 
-// CONECTA CADA HORARIO CON LA PÁGINA DE ASIENTOS
+// CONECTA LOS HORARIOS CON ASIENTOS
 
-horarios.forEach(function (horario) {
+horarios.forEach(
+    function (horario) {
 
-    horario.addEventListener("click", function (evento) {
+        horario.addEventListener(
+            "click",
+            function (evento) {
 
-        // Evita utilizar el enlace incompleto
-        evento.preventDefault();
-
-
-        // Obtiene los datos guardados en el horario
-        const cine = horario.dataset.cine;
-
-        const sala = horario.dataset.sala;
-
-        const hora = horario.dataset.hora;
+                evento.preventDefault();
 
 
-        // Forma la dirección de asientos
-        const direccion =
-            "asientos.html?id=" +
-            peliculaId +
-            "&cine=" +
-            encodeURIComponent(cine) +
-            "&sala=" +
-            encodeURIComponent(sala) +
-            "&hora=" +
-            encodeURIComponent(hora) +
-            "&fecha=" +
-            encodeURIComponent(fechaSeleccionada);
+                const cine =
+                    horario.dataset.cine;
+
+                const sala =
+                    horario.dataset.sala;
+
+                const hora =
+                    horario.dataset.hora;
 
 
-        // Abre la selección de asientos
-        window.location.href = direccion;
-    });
-});
+                const direccion =
+                    "asientos.html?id=" +
+                    peliculaId +
+                    "&cine=" +
+                    encodeURIComponent(cine) +
+                    "&sala=" +
+                    encodeURIComponent(sala) +
+                    "&hora=" +
+                    encodeURIComponent(hora) +
+                    "&fecha=" +
+                    encodeURIComponent(
+                        fechaSeleccionada
+                    );
+
+
+                window.location.href =
+                    direccion;
+            }
+        );
+    }
+);
