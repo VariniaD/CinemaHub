@@ -339,28 +339,19 @@ metodosPago.forEach(
                     datosTarjeta.style.display =
                         "flex";
 
-                    numeroTarjeta.required =
-                        true;
-
-                    vencimiento.required =
-                        true;
-
-                    cvv.required =
-                        true;
-
                 } else {
 
                     datosTarjeta.style.display =
                         "none";
 
-                    numeroTarjeta.required =
-                        false;
+                    numeroTarjeta.value =
+                        "";
 
-                    vencimiento.required =
-                        false;
+                    vencimiento.value =
+                        "";
 
-                    cvv.required =
-                        false;
+                    cvv.value =
+                        "";
                 }
             }
         );
@@ -376,6 +367,9 @@ formularioCompra.addEventListener(
 
         evento.preventDefault();
 
+        console.log(
+            "Formulario enviado correctamente"
+        );
 
         ocultarErrorCompra();
 
@@ -472,6 +466,10 @@ formularioCompra.addEventListener(
                 metodoPago
         };
 
+                console.log(
+            "Datos enviados al backend:",
+            datosCompra
+        );
 
         // DESHABILITA EL BOTÓN
 
@@ -522,11 +520,14 @@ formularioCompra.addEventListener(
         );
 
 
+
         // ABRE LA CONFIRMACIÓN
 
         window.location.href =
             "confirmacion.html";
     }
+
+
 );
 
 
