@@ -149,7 +149,6 @@
     right: 0;
     bottom: 0;
     left: 0;
-    background-image: url("../img/comer-rezar-amar.jpeg");
     background-size: cover;
     background-position: center;
     opacity: 0.15;
@@ -491,6 +490,20 @@
 
 .volver-cartelera:hover {
     text-decoration: underline;
+}
+
+/* ESTADO INICIAL DE LA PÁGINA */
+
+.mensaje-sin-ticket {
+    display: none;
+}
+
+.mensaje-confirmacion {
+    display: none;
+}
+
+.ticket-digital {
+    display: none;
 }
 
 /* AJUSTE PARA LAPTOPS PEQUEÑAS */

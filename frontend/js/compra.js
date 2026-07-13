@@ -303,6 +303,7 @@ formularioCompra.addEventListener(
         const datosCompra = {
             peliculaId: peliculaId,
             pelicula: pelicula.titulo,
+            imagen: pelicula.imagen,
             cine: cine,
             sala: sala,
             fecha: fecha,
