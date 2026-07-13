@@ -1,14 +1,16 @@
 require("dotenv").config();
 
-const app = require("./src/app");
+const app =
+    require("./src/app");
 
-const sequelize = require("./src/config/database");
+const sequelize =
+    require("./src/config/database");
+
+
+// IMPORTA LOS MODELOS Y SUS RELACIONES
 
 require("./src/models");
 
-//IMPORTACION DE MODELOS
-
-require("./src/models");
 
 // OBTIENE EL PUERTO
 
@@ -30,19 +32,28 @@ async function iniciarServidor() {
             "Conexión con MySQL realizada correctamente"
         );
 
-        //creacion de tablas en la base de datos
+
+        // CREA O SINCRONIZA LAS TABLAS
+
         await sequelize.sync();
-        console.log("Tablas sincronizadas correctamente en la base de datos");
+
+        console.log(
+            "Tablas sincronizadas correctamente en la base de datos"
+        );
+
 
         // INICIA EXPRESS
 
-        app.listen(PORT, function () {
+        app.listen(
+            PORT,
+            function () {
 
-            console.log(
-                "Servidor de CinemaHub funcionando en http://localhost:" +
-                PORT
-            );
-        });
+                console.log(
+                    "Servidor de CinemaHub funcionando en http://localhost:" +
+                    PORT
+                );
+            }
+        );
 
     } catch (error) {
 
@@ -50,7 +61,9 @@ async function iniciarServidor() {
             "No se pudo conectar con MySQL:"
         );
 
-        console.error(error.message);
+        console.error(
+            error.message
+        );
     }
 }
 

@@ -13,14 +13,23 @@ const Funcion =
 const Asiento =
     require("./Asiento");
 
+const Compra =
+    require("./Compra");
+
+const CompraAsiento =
+    require("./CompraAsiento");
+
 
 // RELACIÓN ENTRE CINE Y SALA
 
 Cine.hasMany(
     Sala,
     {
-        foreignKey: "cineId",
-        as: "salas"
+        foreignKey:
+            "cineId",
+
+        as:
+            "salas"
     }
 );
 
@@ -28,8 +37,11 @@ Cine.hasMany(
 Sala.belongsTo(
     Cine,
     {
-        foreignKey: "cineId",
-        as: "cine"
+        foreignKey:
+            "cineId",
+
+        as:
+            "cine"
     }
 );
 
@@ -39,8 +51,11 @@ Sala.belongsTo(
 Pelicula.hasMany(
     Funcion,
     {
-        foreignKey: "peliculaId",
-        as: "funciones"
+        foreignKey:
+            "peliculaId",
+
+        as:
+            "funciones"
     }
 );
 
@@ -48,8 +63,11 @@ Pelicula.hasMany(
 Funcion.belongsTo(
     Pelicula,
     {
-        foreignKey: "peliculaId",
-        as: "pelicula"
+        foreignKey:
+            "peliculaId",
+
+        as:
+            "pelicula"
     }
 );
 
@@ -59,8 +77,11 @@ Funcion.belongsTo(
 Sala.hasMany(
     Funcion,
     {
-        foreignKey: "salaId",
-        as: "funciones"
+        foreignKey:
+            "salaId",
+
+        as:
+            "funciones"
     }
 );
 
@@ -68,8 +89,11 @@ Sala.hasMany(
 Funcion.belongsTo(
     Sala,
     {
-        foreignKey: "salaId",
-        as: "sala"
+        foreignKey:
+            "salaId",
+
+        as:
+            "sala"
     }
 );
 
@@ -79,8 +103,11 @@ Funcion.belongsTo(
 Funcion.hasMany(
     Asiento,
     {
-        foreignKey: "funcionId",
-        as: "asientos"
+        foreignKey:
+            "funcionId",
+
+        as:
+            "asientos"
     }
 );
 
@@ -88,8 +115,89 @@ Funcion.hasMany(
 Asiento.belongsTo(
     Funcion,
     {
-        foreignKey: "funcionId",
-        as: "funcion"
+        foreignKey:
+            "funcionId",
+
+        as:
+            "funcion"
+    }
+);
+
+
+// RELACIÓN ENTRE FUNCIÓN Y COMPRA
+
+Funcion.hasMany(
+    Compra,
+    {
+        foreignKey:
+            "funcionId",
+
+        as:
+            "compras"
+    }
+);
+
+
+Compra.belongsTo(
+    Funcion,
+    {
+        foreignKey:
+            "funcionId",
+
+        as:
+            "funcion"
+    }
+);
+
+
+// RELACIÓN ENTRE COMPRA Y COMPRA ASIENTO
+
+Compra.hasMany(
+    CompraAsiento,
+    {
+        foreignKey:
+            "compraId",
+
+        as:
+            "detallesAsientos"
+    }
+);
+
+
+CompraAsiento.belongsTo(
+    Compra,
+    {
+        foreignKey:
+            "compraId",
+
+        as:
+            "compra"
+    }
+);
+
+
+// RELACIÓN ENTRE ASIENTO Y COMPRA ASIENTO
+
+Asiento.hasMany(
+    CompraAsiento,
+    {
+        foreignKey:
+            "asientoId",
+
+        as:
+            "detallesCompras"
+    }
+);
+
+
+CompraAsiento.belongsTo(
+    Asiento,
+    {
+        foreignKey:
+            "asientoId",
+
+        as:
+            "asiento"
     }
 );
 
@@ -101,5 +209,7 @@ module.exports = {
     Cine,
     Sala,
     Funcion,
-    Asiento
+    Asiento,
+    Compra,
+    CompraAsiento
 };

@@ -172,7 +172,7 @@
 
                 <form class="formulario-compra" id="formulario-compra">
 
-                    
+
                     <div class="grupo-campo">
 
                         <label for="nombre">
@@ -209,16 +209,13 @@
 
                         <label for="telefono">
                             Teléfono
-                            <span class="texto-opcional">
-                                (Opcional)
-                            </span>
                         </label>
 
                         <div class="campo-con-icono">
 
                             <span class="icono-campo">☎</span>
 
-                            <input type="tel" id="telefono" name="telefono" placeholder="+591 70000000">
+                            <input type="tel" id="telefono" name="telefono" placeholder="+591 70000000" required>
 
                         </div>
 
@@ -299,7 +296,10 @@
 
                     </div>
 
-                    <button type="submit" class="boton-finalizar">
+                    <p class="mensaje-error-compra" id="mensaje-error-compra">
+                    </p>
+
+                    <button type="submit" class="boton-finalizar" id="boton-finalizar">
 
                         Finalizar compra
 
@@ -336,6 +336,7 @@
     </footer>
 
     <script src="js/datos.js"></script>
+    <script src="js/api.js"></script>
     <script src="js/compra.js"></script>
 </body>
 

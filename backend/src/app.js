@@ -10,21 +10,24 @@ const peliculaRoutes =
 const funcionRoutes =
     require("./routes/funcionRoutes");
 
+const compraRoutes =
+    require("./routes/compraRoutes");
 
-// CREA LA APLICACIÓN DE EXPRESS
+
+// CREA LA APLICACIÓN
 
 const app =
     express();
 
 
-// PERMITE QUE EL FRONTEND CONSULTE EL BACKEND
+// PERMITE LA COMUNICACIÓN CON EL FRONTEND
 
 app.use(
     cors()
 );
 
 
-// PERMITE RECIBIR DATOS JSON
+// PERMITE RECIBIR JSON
 
 app.use(
     express.json()
@@ -54,6 +57,7 @@ app.get(
         res.json({
             nombre:
                 "CinemaHub API",
+
             estado:
                 "activo"
         });
@@ -69,11 +73,19 @@ app.use(
 );
 
 
-// RUTAS DE FUNCIONES
+// RUTAS DE FUNCIONES Y ASIENTOS
 
 app.use(
     "/api/funciones",
     funcionRoutes
+);
+
+
+// RUTAS DE COMPRAS
+
+app.use(
+    "/api/compras",
+    compraRoutes
 );
 
 

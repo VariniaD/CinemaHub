@@ -1,22 +1,27 @@
-// PRECIOS UTILIZADOS EN LA COMPRA
+// PRECIOS MOSTRADOS EN EL RESUMEN
 
-const precioEntrada = 24;
+const precioEntrada =
+    24;
 
-const cargoServicio = 5;
+const cargoServicio =
+    5;
 
 
 // OBTIENE LOS DATOS DE LA URL
 
 const parametros =
-    new URLSearchParams(window.location.search);
+    new URLSearchParams(
+        window.location.search
+    );
 
-    // OBTIENE EL IDENTIFICADOR DE LA FUNCIÓN
 
-let funcionId =
+// OBTIENE EL IDENTIFICADOR DE LA FUNCIÓN
+
+const funcionId =
     parametros.get("funcionId");
 
 
-// GUARDA LOS DATOS RECIBIDOS
+// OBTIENE LOS DEMÁS DATOS
 
 let peliculaId =
     parametros.get("id");
@@ -37,164 +42,140 @@ const asientosTexto =
     parametros.get("asientos");
 
 
-// COLOCA VALORES BÁSICOS
-
-if (!peliculaId) {
-    peliculaId = "1";
-}
-
-if (!cine) {
-    cine = "centro";
-}
-
-if (!sala) {
-    sala = "Sala Premium";
-}
-
-if (!hora) {
-    hora = "19:30";
-}
-
-
-// BUSCA LA PELÍCULA
-
-const pelicula =
-    buscarPelicula(peliculaId);
-
-
 // PREPARA LOS ASIENTOS
 
 let asientos = [];
 
+
 if (asientosTexto) {
-    asientos = asientosTexto.split("-");
+
+    asientos =
+        asientosTexto
+            .split("-")
+            .filter(
+                function (codigo) {
+
+                    return codigo.trim() !== "";
+                }
+            );
 }
 
 
-// CALCULA LOS PRECIOS
+// BUSCA LA PELÍCULA LOCAL PARA MOSTRAR EL RESUMEN
+
+let pelicula =
+    buscarPelicula(
+        peliculaId
+    );
+
+
+// CALCULA LOS PRECIOS VISUALES
 
 const cantidadAsientos =
     asientos.length;
 
 const subtotal =
-    cantidadAsientos * precioEntrada;
+    cantidadAsientos *
+    precioEntrada;
 
 
 let servicio = 0;
 
+
 if (cantidadAsientos > 0) {
-    servicio = cargoServicio;
+
+    servicio =
+        cargoServicio;
 }
 
 
 const total =
-    subtotal + servicio;
+    subtotal +
+    servicio;
 
 
 // BUSCA LOS ELEMENTOS DEL RESUMEN
 
 const posterCompra =
-    document.getElementById("poster-compra");
+    document.getElementById(
+        "poster-compra"
+    );
 
 const tituloCompra =
-    document.getElementById("titulo-compra");
+    document.getElementById(
+        "titulo-compra"
+    );
 
 const fechaCompra =
-    document.getElementById("fecha-compra");
+    document.getElementById(
+        "fecha-compra"
+    );
 
 const horaCompra =
-    document.getElementById("hora-compra");
+    document.getElementById(
+        "hora-compra"
+    );
 
 const cineCompra =
-    document.getElementById("cine-compra");
+    document.getElementById(
+        "cine-compra"
+    );
 
 const salaCompra =
-    document.getElementById("sala-compra");
+    document.getElementById(
+        "sala-compra"
+    );
 
 const cantidadAsientosTexto =
-    document.getElementById("cantidad-asientos");
+    document.getElementById(
+        "cantidad-asientos"
+    );
 
 const asientosCompra =
-    document.getElementById("asientos-compra");
+    document.getElementById(
+        "asientos-compra"
+    );
 
 const subtotalCompra =
-    document.getElementById("subtotal-compra");
+    document.getElementById(
+        "subtotal-compra"
+    );
 
 const cargoCompra =
-    document.getElementById("cargo-compra");
+    document.getElementById(
+        "cargo-compra"
+    );
 
 const totalCompra =
-    document.getElementById("total-compra");
+    document.getElementById(
+        "total-compra"
+    );
 
 
-// MUESTRA LA PELÍCULA
+// BUSCA LOS ELEMENTOS DEL FORMULARIO
 
-posterCompra.src =
-    pelicula.imagen;
+const formularioCompra =
+    document.getElementById(
+        "formulario-compra"
+    );
 
-posterCompra.alt =
-    "Póster de la película " + pelicula.titulo;
+const botonFinalizar =
+    document.getElementById(
+        "boton-finalizar"
+    );
 
-tituloCompra.textContent =
-    pelicula.titulo;
-
-
-// MUESTRA LOS DATOS DE LA FUNCIÓN
-
-fechaCompra.textContent =
-    fecha || "Hoy";
-
-horaCompra.textContent =
-    hora;
-
-salaCompra.textContent =
-    sala;
-
-
-if (cine === "norte") {
-
-    cineCompra.textContent =
-        "CinemaHub Norte";
-
-} else {
-
-    cineCompra.textContent =
-        "CinemaHub Centro";
-}
-
-
-// MUESTRA LOS ASIENTOS Y PRECIOS
-
-cantidadAsientosTexto.textContent =
-    "Asientos (" + cantidadAsientos + ")";
-
-
-if (cantidadAsientos > 0) {
-
-    asientosCompra.textContent =
-        asientos.join(", ");
-
-} else {
-
-    asientosCompra.textContent =
-        "Sin seleccionar";
-}
-
-
-subtotalCompra.textContent =
-    "Bs " + subtotal.toFixed(2);
-
-cargoCompra.textContent =
-    "Bs " + servicio.toFixed(2);
-
-totalCompra.textContent =
-    "Bs " + total.toFixed(2);
+const mensajeErrorCompra =
+    document.getElementById(
+        "mensaje-error-compra"
+    );
 
 
 // BUSCA LOS MÉTODOS DE PAGO
 
 const opcionesPago =
-    document.querySelectorAll(".opcion-pago");
+    document.querySelectorAll(
+        ".opcion-pago"
+    );
 
 const metodosPago =
     document.querySelectorAll(
@@ -205,80 +186,217 @@ const metodosPago =
 // BUSCA LOS DATOS DE TARJETA
 
 const datosTarjeta =
-    document.querySelector(".datos-tarjeta");
+    document.querySelector(
+        ".datos-tarjeta"
+    );
 
 const numeroTarjeta =
-    document.getElementById("numero-tarjeta");
+    document.getElementById(
+        "numero-tarjeta"
+    );
 
 const vencimiento =
-    document.getElementById("vencimiento");
+    document.getElementById(
+        "vencimiento"
+    );
 
 const cvv =
-    document.getElementById("cvv");
+    document.getElementById(
+        "cvv"
+    );
+
+
+// MUESTRA UN MENSAJE DE ERROR
+
+function mostrarErrorCompra(mensaje) {
+
+    mensajeErrorCompra.textContent =
+        mensaje;
+
+    mensajeErrorCompra.style.display =
+        "block";
+}
+
+
+// OCULTA EL MENSAJE DE ERROR
+
+function ocultarErrorCompra() {
+
+    mensajeErrorCompra.textContent =
+        "";
+
+    mensajeErrorCompra.style.display =
+        "none";
+}
+
+
+// MUESTRA LOS DATOS DE LA COMPRA
+
+function mostrarResumenCompra() {
+
+    if (pelicula) {
+
+        posterCompra.src =
+            pelicula.imagen;
+
+        posterCompra.alt =
+            "Póster de la película " +
+            pelicula.titulo;
+
+        tituloCompra.textContent =
+            pelicula.titulo;
+    }
+
+
+    fechaCompra.textContent =
+        fecha || "Fecha no disponible";
+
+    horaCompra.textContent =
+        hora || "Hora no disponible";
+
+    salaCompra.textContent =
+        sala || "Sala no disponible";
+
+
+    if (cine === "norte") {
+
+        cineCompra.textContent =
+            "CinemaHub Norte";
+
+    } else if (cine === "centro") {
+
+        cineCompra.textContent =
+            "CinemaHub Centro";
+
+    } else {
+
+        cineCompra.textContent =
+            cine || "CinemaHub";
+    }
+
+
+    cantidadAsientosTexto.textContent =
+        "Asientos (" +
+        cantidadAsientos +
+        ")";
+
+
+    if (cantidadAsientos > 0) {
+
+        asientosCompra.textContent =
+            asientos.join(", ");
+
+    } else {
+
+        asientosCompra.textContent =
+            "Sin seleccionar";
+    }
+
+
+    subtotalCompra.textContent =
+        "Bs " +
+        subtotal.toFixed(2);
+
+    cargoCompra.textContent =
+        "Bs " +
+        servicio.toFixed(2);
+
+    totalCompra.textContent =
+        "Bs " +
+        total.toFixed(2);
+}
 
 
 // CAMBIA EL MÉTODO DE PAGO
 
-metodosPago.forEach(function (metodo) {
+metodosPago.forEach(
+    function (metodo) {
 
-    metodo.addEventListener("change", function () {
+        metodo.addEventListener(
+            "change",
+            function () {
 
-        // Quita el estilo activo
-        opcionesPago.forEach(function (opcion) {
-            opcion.classList.remove("opcion-activa");
-        });
+                opcionesPago.forEach(
+                    function (opcion) {
+
+                        opcion.classList.remove(
+                            "opcion-activa"
+                        );
+                    }
+                );
 
 
-        // Activa la opción elegida
-        metodo.parentElement.classList.add(
-            "opcion-activa"
+                metodo.parentElement.classList.add(
+                    "opcion-activa"
+                );
+
+
+                if (
+                    metodo.value ===
+                    "tarjeta"
+                ) {
+
+                    datosTarjeta.style.display =
+                        "flex";
+
+                    numeroTarjeta.required =
+                        true;
+
+                    vencimiento.required =
+                        true;
+
+                    cvv.required =
+                        true;
+
+                } else {
+
+                    datosTarjeta.style.display =
+                        "none";
+
+                    numeroTarjeta.required =
+                        false;
+
+                    vencimiento.required =
+                        false;
+
+                    cvv.required =
+                        false;
+                }
+            }
         );
-
-
-        if (metodo.value === "tarjeta") {
-
-            datosTarjeta.style.display = "flex";
-
-            numeroTarjeta.required = true;
-
-            vencimiento.required = true;
-
-            cvv.required = true;
-
-        } else {
-
-            datosTarjeta.style.display = "none";
-
-            numeroTarjeta.required = false;
-
-            vencimiento.required = false;
-
-            cvv.required = false;
-        }
-    });
-});
-
-
-// BUSCA EL FORMULARIO
-
-const formularioCompra =
-    document.getElementById("formulario-compra");
+    }
+);
 
 
 // PROCESA LA COMPRA
 
 formularioCompra.addEventListener(
     "submit",
-    function (evento) {
+    async function (evento) {
 
-        // Evita el envío tradicional del formulario
         evento.preventDefault();
 
 
-        // Verifica que existan asientos
-        if (cantidadAsientos === 0) {
+        ocultarErrorCompra();
 
-            alert(
+
+        // VERIFICA LA FUNCIÓN
+
+        if (!funcionId) {
+
+            mostrarErrorCompra(
+                "No se recibió una función válida. Vuelve a seleccionar un horario."
+            );
+
+            return;
+        }
+
+
+        // VERIFICA LOS ASIENTOS
+
+        if (asientos.length === 0) {
+
+            mostrarErrorCompra(
                 "Debes seleccionar al menos un asiento."
             );
 
@@ -286,117 +404,132 @@ formularioCompra.addEventListener(
         }
 
 
-        // Obtiene los datos personales
+        // OBTIENE LOS DATOS PERSONALES
+
         const nombre =
-            document.getElementById("nombre").value.trim();
+            document
+                .getElementById(
+                    "nombre"
+                )
+                .value
+                .trim();
 
         const correo =
-            document.getElementById("correo").value.trim();
+            document
+                .getElementById(
+                    "correo"
+                )
+                .value
+                .trim();
 
         const telefono =
-            document.getElementById("telefono").value.trim();
+            document
+                .getElementById(
+                    "telefono"
+                )
+                .value
+                .trim();
 
-        const metodo =
+        const metodoSeleccionado =
             document.querySelector(
                 'input[name="metodo"]:checked'
-            ).value;
+            );
 
 
-        // CREA EL OBJETO DE LA COMPRA
-        // Este objeto luego podrá enviarse al backend.
+        if (!metodoSeleccionado) {
+
+            mostrarErrorCompra(
+                "Debes seleccionar un método de pago."
+            );
+
+            return;
+        }
+
+
+        const metodoPago =
+            metodoSeleccionado.value;
+
+
+        // PREPARA ÚNICAMENTE LOS DATOS NECESARIOS
 
         const datosCompra = {
-            funcionId: funcionId,
-            peliculaId: peliculaId,
-            pelicula: pelicula.titulo,
-            imagen: pelicula.imagen,
-            cine: cine,
-            sala: sala,
-            fecha: fecha,
-            hora: hora,
-            asientos: asientosTexto,
-            subtotal: subtotal.toFixed(2),
-            cargo: servicio.toFixed(2),
-            total: total.toFixed(2),
-            nombre: nombre,
-            correo: correo,
-            telefono: telefono,
-            metodo: metodo
+            funcionId:
+                Number(funcionId),
+
+            asientos:
+                asientos,
+
+            nombre:
+                nombre,
+
+            correo:
+                correo,
+
+            telefono:
+                telefono,
+
+            metodoPago:
+                metodoPago
         };
 
 
-        // GUARDA TEMPORALMENTE EL TICKET EN EL NAVEGADOR
+        // DESHABILITA EL BOTÓN
+
+        botonFinalizar.disabled =
+            true;
+
+        botonFinalizar.innerHTML =
+            "Procesando compra...";
+
+
+        // ENVÍA LA COMPRA AL BACKEND
+
+        const resultado =
+            await registrarCompraApi(
+                datosCompra
+            );
+
+
+        if (!resultado.correcto) {
+
+            mostrarErrorCompra(
+                resultado.mensaje
+            );
+
+
+            botonFinalizar.disabled =
+                false;
+
+            botonFinalizar.innerHTML =
+                'Finalizar compra <span>→</span>';
+
+
+            return;
+        }
+
+
+        // OBTIENE EL TICKET REAL DEL BACKEND
+
+        const ticket =
+            resultado.datos.ticket;
+
+
+        // GUARDA EL TICKET REAL
 
         localStorage.setItem(
             "ultimoTicket",
-            JSON.stringify(datosCompra)
-        );
-
-
-        /*
-        FUTURA CONEXIÓN CON EL BACKEND:
-
-        fetch("http://localhost:3000/api/compras", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(datosCompra)
-        });
-        */
-
-
-        // PREPARA SOLAMENTE LOS DATOS SEGUROS
-        // No se envía el número de tarjeta ni el CVV.
-
-        const datosDireccion =
-            new URLSearchParams();
-
-        datosDireccion.set(
-            "pelicula",
-            pelicula.titulo
-        );
-
-        datosDireccion.set(
-            "cine",
-            cine
-        );
-
-        datosDireccion.set(
-            "sala",
-            sala
-        );
-
-        datosDireccion.set(
-            "fecha",
-            fecha || ""
-        );
-
-        datosDireccion.set(
-            "hora",
-            hora
-        );
-
-        datosDireccion.set(
-            "asientos",
-            asientosTexto
-        );
-
-        datosDireccion.set(
-            "total",
-            total.toFixed(2)
-        );
-
-        datosDireccion.set(
-            "nombre",
-            nombre
+            JSON.stringify(ticket)
         );
 
 
         // ABRE LA CONFIRMACIÓN
 
         window.location.href =
-            "confirmacion.html?" +
-            datosDireccion.toString();
+            "confirmacion.html";
     }
 );
+
+
+// INICIA LA PÁGINA
+
+mostrarResumenCompra();

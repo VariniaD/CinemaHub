@@ -180,3 +180,62 @@ async function obtenerAsientosApi(funcionId) {
         return null;
     }
 }
+
+// REGISTRA UNA COMPRA EN EL BACKEND
+
+async function registrarCompraApi(datosCompra) {
+
+    try {
+
+        const respuesta =
+            await fetch(
+                API_URL + "/compras",
+                {
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type":
+                            "application/json"
+                    },
+
+                    body:
+                        JSON.stringify(
+                            datosCompra
+                        )
+                }
+            );
+
+
+        const datos =
+            await respuesta.json();
+
+
+        if (!respuesta.ok) {
+
+            throw new Error(
+                datos.mensaje ||
+                "No se pudo realizar la compra"
+            );
+        }
+
+
+        return {
+            correcto: true,
+            datos: datos
+        };
+
+    } catch (error) {
+
+        console.error(
+            "Error al registrar la compra:",
+            error
+        );
+
+
+        return {
+            correcto: false,
+            mensaje:
+                error.message
+        };
+    }
+}

@@ -1,120 +1,148 @@
-// BUSCA LOS BLOQUES PRINCIPALES DE LA PÁGINA
+// BUSCA LOS BLOQUES PRINCIPALES
 
 const mensajeSinTicket =
-    document.getElementById("mensaje-sin-ticket");
+    document.getElementById(
+        "mensaje-sin-ticket"
+    );
 
 const mensajeConfirmacion =
-    document.getElementById("mensaje-confirmacion");
+    document.getElementById(
+        "mensaje-confirmacion"
+    );
 
 const ticketDigital =
-    document.getElementById("ticket-digital");
+    document.getElementById(
+        "ticket-digital"
+    );
 
 
-// RECUPERA EL ÚLTIMO TICKET GUARDADO
+// RECUPERA EL ÚLTIMO TICKET
 
 const ticketGuardadoTexto =
-    localStorage.getItem("ultimoTicket");
+    localStorage.getItem(
+        "ultimoTicket"
+    );
 
 
-// CREA UNA VARIABLE PARA EL TICKET
+let ticketGuardado =
+    null;
 
-let ticketGuardado = null;
 
-
-// CONVIERTE EL TEXTO GUARDADO EN UN OBJETO
+// CONVIERTE EL TEXTO EN OBJETO
 
 if (ticketGuardadoTexto) {
 
     try {
 
         ticketGuardado =
-            JSON.parse(ticketGuardadoTexto);
+            JSON.parse(
+                ticketGuardadoTexto
+            );
 
     } catch (error) {
 
-        ticketGuardado = null;
+        ticketGuardado =
+            null;
     }
 }
 
 
-// REVISA SI EL TICKET GUARDADO ES VÁLIDO
+// REVISA SI EL TICKET ES VÁLIDO
 
 const hayTicketValido =
     ticketGuardado !== null &&
+    ticketGuardado.codigoTicket &&
     ticketGuardado.pelicula &&
     ticketGuardado.fecha &&
     ticketGuardado.hora &&
     ticketGuardado.sala &&
-    ticketGuardado.asientos &&
+    Array.isArray(
+        ticketGuardado.asientos
+    ) &&
+    ticketGuardado.asientos.length > 0 &&
     ticketGuardado.nombre &&
     ticketGuardado.total;
 
 
-// SI NO EXISTE UNA COMPRA VÁLIDA
+// SI NO EXISTE TICKET
 
 if (!hayTicketValido) {
 
-    // Muestra únicamente el mensaje vacío
     mensajeSinTicket.style.display =
         "block";
 
-    // Oculta el mensaje de agradecimiento
     mensajeConfirmacion.style.display =
         "none";
 
-    // Oculta completamente el ticket
     ticketDigital.style.display =
         "none";
 
 } else {
 
-    // Oculta el mensaje vacío
     mensajeSinTicket.style.display =
         "none";
 
-    // Muestra el mensaje de compra correcta
     mensajeConfirmacion.style.display =
         "block";
 
-    // Muestra el ticket
     ticketDigital.style.display =
         "block";
 
 
-    // BUSCA LOS ELEMENTOS INTERNOS DEL TICKET
+    // BUSCA LOS ELEMENTOS DEL TICKET
 
     const fondoTicket =
-        document.getElementById("fondo-ticket");
+        document.getElementById(
+            "fondo-ticket"
+        );
 
     const peliculaTicket =
-        document.getElementById("pelicula-ticket");
+        document.getElementById(
+            "pelicula-ticket"
+        );
 
     const cineTicket =
-        document.getElementById("cine-ticket");
+        document.getElementById(
+            "cine-ticket"
+        );
 
     const fechaTicket =
-        document.getElementById("fecha-ticket");
+        document.getElementById(
+            "fecha-ticket"
+        );
 
     const horaTicket =
-        document.getElementById("hora-ticket");
+        document.getElementById(
+            "hora-ticket"
+        );
 
     const salaTicket =
-        document.getElementById("sala-ticket");
+        document.getElementById(
+            "sala-ticket"
+        );
 
     const asientosTicket =
-        document.getElementById("asientos-ticket");
+        document.getElementById(
+            "asientos-ticket"
+        );
 
     const compradorTicket =
-        document.getElementById("comprador-ticket");
+        document.getElementById(
+            "comprador-ticket"
+        );
 
     const totalTicket =
-        document.getElementById("total-ticket");
+        document.getElementById(
+            "total-ticket"
+        );
 
     const codigoTicket =
-        document.getElementById("codigo-ticket");
+        document.getElementById(
+            "codigo-ticket"
+        );
 
 
-    // MUESTRA LA IMAGEN DE LA PELÍCULA
+    // MUESTRA LA IMAGEN
 
     if (ticketGuardado.imagen) {
 
@@ -130,65 +158,48 @@ if (!hayTicketValido) {
     }
 
 
-    // MUESTRA EL NOMBRE DE LA PELÍCULA
+    // MUESTRA LOS DATOS
 
     peliculaTicket.textContent =
         ticketGuardado.pelicula;
 
 
-    // MUESTRA EL CINE
+    cineTicket.textContent =
+        ticketGuardado.cine;
 
-    if (ticketGuardado.cine === "norte") {
-
-        cineTicket.textContent =
-            "CinemaHub Norte";
-
-    } else {
-
-        cineTicket.textContent =
-            "CinemaHub Centro";
-    }
-
-
-    // MUESTRA LA HORA
 
     horaTicket.textContent =
         ticketGuardado.hora;
 
 
-    // MUESTRA LA SALA
-
     salaTicket.textContent =
         ticketGuardado.sala;
 
 
-    // PREPARA LOS ASIENTOS
-
-    const asientos =
-        ticketGuardado.asientos.split("-");
-
-
-    // MUESTRA LOS ASIENTOS
-
     asientosTicket.textContent =
-        asientos.join(", ");
+        ticketGuardado.asientos.join(
+            ", "
+        );
 
-
-    // MUESTRA EL COMPRADOR
 
     compradorTicket.textContent =
         ticketGuardado.nombre;
 
 
-    // MUESTRA EL TOTAL
-
     totalTicket.textContent =
-        "Bs " + ticketGuardado.total;
+        "Bs " +
+        ticketGuardado.total;
+
+
+    codigoTicket.textContent =
+        ticketGuardado.codigoTicket;
 
 
     // FORMATEA LA FECHA
 
-    function formatearFecha(fechaTexto) {
+    function formatearFecha(
+        fechaTexto
+    ) {
 
         const partes =
             fechaTexto.split("-");
@@ -205,70 +216,21 @@ if (!hayTicketValido) {
         return fechaObjeto.toLocaleDateString(
             "es-BO",
             {
-                day: "2-digit",
-                month: "short",
-                year: "numeric"
+                day:
+                    "2-digit",
+
+                month:
+                    "short",
+
+                year:
+                    "numeric"
             }
         );
     }
 
 
-    // MUESTRA LA FECHA
-
     fechaTicket.textContent =
         formatearFecha(
             ticketGuardado.fecha
         );
-
-
-    // REVISA SI EL TICKET YA TIENE CÓDIGO
-
-    let codigoFinal =
-        ticketGuardado.codigo;
-
-
-    // SI TODAVÍA NO TIENE, GENERA UNO
-
-    if (!codigoFinal) {
-
-        const numeroTicket =
-            Math.floor(
-                Math.random() * 9000
-            ) + 1000;
-
-
-        const anio =
-            new Date().getFullYear();
-
-
-        const codigoAsientos =
-            asientos.join("");
-
-
-        codigoFinal =
-            "CH-" +
-            anio +
-            "-" +
-            codigoAsientos +
-            "-" +
-            numeroTicket;
-
-
-        // GUARDA EL CÓDIGO PARA QUE NO CAMBIE AL RECARGAR
-
-        ticketGuardado.codigo =
-            codigoFinal;
-
-
-        localStorage.setItem(
-            "ultimoTicket",
-            JSON.stringify(ticketGuardado)
-        );
-    }
-
-
-    // MUESTRA EL CÓDIGO DEL TICKET
-
-    codigoTicket.textContent =
-        codigoFinal;
 }
