@@ -16,28 +16,43 @@ async function cargarDatos() {
 
     try {
 
-        // CONECTA CON MYSQL
+        // PRUEBA LA CONEXIÓN CON MYSQL
 
         await sequelize.authenticate();
 
+        console.log(
+            "Conexión con MySQL realizada correctamente"
+        );
 
-        // CREA LA TABLA SI NO EXISTE
+
+        // CREA LA TABLA SI TODAVÍA NO EXISTE
 
         await sequelize.sync();
 
 
-        // REVISA CUÁNTAS PELÍCULAS EXISTEN
+        // ELIMINA SOLAMENTE REGISTROS VACÍOS
+
+        await Pelicula.destroy({
+            where: {
+                titulo: null
+            }
+        });
+
+
+        // REVISA CUÁNTAS PELÍCULAS VÁLIDAS EXISTEN
 
         const cantidadPeliculas =
             await Pelicula.count();
 
 
-        // EVITA INSERTAR PELÍCULAS DUPLICADAS
+        // EVITA DUPLICAR LOS DATOS
 
         if (cantidadPeliculas > 0) {
 
             console.log(
-                "Las películas ya fueron cargadas anteriormente"
+                "Ya existen " +
+                cantidadPeliculas +
+                " películas en la base de datos"
             );
 
             return;
@@ -46,13 +61,18 @@ async function cargarDatos() {
 
         // INSERTA TODAS LAS PELÍCULAS
 
-        await Pelicula.bulkCreate(
-            peliculasIniciales
-        );
+        const peliculasCreadas =
+            await Pelicula.bulkCreate(
+                peliculasIniciales,
+                {
+                    validate: true
+                }
+            );
 
 
         console.log(
-            "Películas cargadas correctamente"
+            peliculasCreadas.length +
+            " películas cargadas correctamente"
         );
 
     } catch (error) {
@@ -61,11 +81,9 @@ async function cargarDatos() {
             "Error al cargar las películas:"
         );
 
-        console.error(error.message);
+        console.error(error);
 
     } finally {
-
-        // CIERRA LA CONEXIÓN
 
         await sequelize.close();
     }
