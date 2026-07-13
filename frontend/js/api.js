@@ -82,3 +82,60 @@ async function obtenerPeliculaPorIdApi(id) {
         return null;
     }
 }
+
+// OBTIENE LAS FUNCIONES DE UNA PELÍCULA
+
+async function obtenerFuncionesApi(
+    peliculaId,
+    fecha
+) {
+
+    try {
+
+        let direccion =
+            API_URL +
+            "/peliculas/" +
+            peliculaId +
+            "/funciones";
+
+
+        // AGREGA LA FECHA CUANDO SE RECIBE
+
+        if (fecha) {
+
+            direccion =
+                direccion +
+                "?fecha=" +
+                encodeURIComponent(fecha);
+        }
+
+
+        const respuesta =
+            await fetch(direccion);
+
+
+        if (!respuesta.ok) {
+
+            throw new Error(
+                "No se pudieron obtener las funciones"
+            );
+        }
+
+
+        const datos =
+            await respuesta.json();
+
+
+        return datos.funciones;
+
+    } catch (error) {
+
+        console.error(
+            "Error al consultar las funciones:",
+            error
+        );
+
+
+        return [];
+    }
+}

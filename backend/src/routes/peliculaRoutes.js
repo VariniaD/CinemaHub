@@ -4,7 +4,15 @@ const express =
 const {
     obtenerPeliculas,
     obtenerPeliculaPorId
-} = require("../controllers/peliculaController");
+} = require(
+    "../controllers/peliculaController"
+);
+
+const {
+    obtenerFuncionesPorPelicula
+} = require(
+    "../controllers/funcionController"
+);
 
 
 // CREA EL ENRUTADOR
@@ -13,7 +21,7 @@ const router =
     express.Router();
 
 
-// RUTA PARA OBTENER TODAS LAS PELÍCULAS
+// OBTIENE TODAS LAS PELÍCULAS
 
 router.get(
     "/",
@@ -21,7 +29,15 @@ router.get(
 );
 
 
-// RUTA PARA OBTENER UNA PELÍCULA POR ID
+// OBTIENE LAS FUNCIONES DE UNA PELÍCULA
+
+router.get(
+    "/:id/funciones",
+    obtenerFuncionesPorPelicula
+);
+
+
+// OBTIENE UNA PELÍCULA POR ID
 
 router.get(
     "/:id",

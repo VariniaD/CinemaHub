@@ -1,102 +1,327 @@
 // BUSCA LOS BOTONES DE LOS FILTROS
 
-const filtroHoy = document.getElementById("filtro-hoy");
+const filtroHoy =
+    document.getElementById("filtro-hoy");
 
-const filtroProximos = document.getElementById("filtro-proximos");
+const filtroProximos =
+    document.getElementById("filtro-proximos");
 
 
-// BUSCA LAS PELÍCULAS ACTUALES Y LA TARJETA DE PRÓXIMOS ESTRENOS
+// BUSCA LAS TARJETAS DE PELÍCULAS
 
-const peliculasActuales =
+const tarjetasPeliculas =
     document.querySelectorAll(".tarjeta-pelicula");
+
+
+// BUSCA LA TARJETA DE PRÓXIMOS ESTRENOS
 
 const tarjetaProximamente =
     document.querySelector(".tarjeta-proximamente");
 
 
-// BUSCA TODOS LOS BOTONES DE ASIENTOS
-
-const botonesAsientos =
-    document.querySelectorAll(".boton-asientos");
-
-
-// OBTIENE LA FECHA ACTUAL EN FORMATO AÑO-MES-DÍA
+// OBTIENE LA FECHA ACTUAL
 
 function obtenerFechaActual() {
 
-    const fecha = new Date();
+    const fecha =
+        new Date();
 
-    const anio = fecha.getFullYear();
+    const anio =
+        fecha.getFullYear();
 
-    const mes = String(fecha.getMonth() + 1).padStart(2, "0");
+    const mes =
+        String(
+            fecha.getMonth() + 1
+        ).padStart(2, "0");
 
-    const dia = String(fecha.getDate()).padStart(2, "0");
+    const dia =
+        String(
+            fecha.getDate()
+        ).padStart(2, "0");
 
-    return anio + "-" + mes + "-" + dia;
+    return (
+        anio +
+        "-" +
+        mes +
+        "-" +
+        dia
+    );
 }
 
 
-// PREPARA EL ENLACE DIRECTO A LOS ASIENTOS
+// BUSCA UNA PELÍCULA DENTRO DE UNA LISTA
 
-botonesAsientos.forEach(function (boton) {
+function buscarPeliculaEnLista(
+    peliculas,
+    peliculaId
+) {
 
-    // Obtiene el id guardado en el botón
-    const peliculaId = boton.dataset.id;
+    for (
+        let i = 0;
+        i < peliculas.length;
+        i++
+    ) {
 
-    // Forma un enlace con una función predeterminada
-    boton.href =
-        "asientos.html?id=" +
-        peliculaId +
-        "&cine=centro" +
-        "&sala=Sala%20Premium" +
-        "&hora=19%3A30" +
-        "&fecha=" +
-        obtenerFechaActual();
-});
+        if (
+            String(peliculas[i].id) ===
+            String(peliculaId)
+        ) {
 
-
-// MUESTRA LAS PELÍCULAS EN CARTELERA
-
-filtroHoy.addEventListener("click", function () {
-
-    // Activa visualmente el botón Hoy
-    filtroHoy.classList.add("filtro-activo");
-
-    filtroProximos.classList.remove("filtro-activo");
+            return peliculas[i];
+        }
+    }
 
 
-    // Muestra todas las películas actuales
-    peliculasActuales.forEach(function (pelicula) {
-        pelicula.style.display = "";
-    });
+    return null;
+}
 
 
-    // Oculta la tarjeta de próximos estrenos
-    tarjetaProximamente.style.display = "none";
-});
+// ACTUALIZA UNA TARJETA DE LA CARTELERA
+
+function actualizarTarjeta(
+    tarjeta,
+    pelicula
+) {
+
+    // Busca la imagen
+    const poster =
+        tarjeta.querySelector(
+            ".poster-pelicula"
+        );
 
 
-// MUESTRA LA SECCIÓN DE PRÓXIMOS ESTRENOS
-
-filtroProximos.addEventListener("click", function () {
-
-    // Activa visualmente el segundo filtro
-    filtroProximos.classList.add("filtro-activo");
-
-    filtroHoy.classList.remove("filtro-activo");
+    // Busca el valor de la calificación
+    const valorCalificacion =
+        tarjeta.querySelector(
+            ".valor-calificacion"
+        );
 
 
-    // Oculta las películas actuales
-    peliculasActuales.forEach(function (pelicula) {
-        pelicula.style.display = "none";
-    });
+    // Busca el botón de asientos
+    const botonAsientos =
+        tarjeta.querySelector(
+            ".boton-asientos"
+        );
 
 
-    // Muestra la tarjeta de próximos estrenos
-    tarjetaProximamente.style.display = "flex";
-});
+    // Busca el botón de detalles
+    const botonDetalles =
+        tarjeta.querySelector(
+            ".boton-detalles"
+        );
 
 
-// ESTADO INICIAL
+    // Actualiza la imagen
+    if (poster) {
 
-tarjetaProximamente.style.display = "none";
+        poster.src =
+            pelicula.imagen;
+
+        poster.alt =
+            "Póster de la película " +
+            pelicula.titulo;
+    }
+
+
+    // Actualiza la calificación
+    if (valorCalificacion) {
+
+        valorCalificacion.textContent =
+            pelicula.calificacion;
+    }
+
+
+    // Actualiza el identificador de la tarjeta
+    tarjeta.dataset.id =
+        pelicula.id;
+
+
+    // Actualiza el enlace de detalles
+    if (botonDetalles) {
+
+        botonDetalles.href =
+            "pelicula.html?id=" +
+            pelicula.id;
+    }
+
+
+    // Actualiza el enlace directo a asientos
+    if (botonAsientos) {
+
+        botonAsientos.dataset.id =
+            pelicula.id;
+
+        botonAsientos.href =
+            "asientos.html?id=" +
+            pelicula.id +
+            "&cine=centro" +
+            "&sala=" +
+            encodeURIComponent(
+                "Sala Premium"
+            ) +
+            "&hora=" +
+            encodeURIComponent(
+                "19:30"
+            ) +
+            "&fecha=" +
+            encodeURIComponent(
+                obtenerFechaActual()
+            );
+    }
+}
+
+
+// CARGA LAS PELÍCULAS
+
+async function cargarCartelera() {
+
+    // Intenta obtener las películas del backend
+    let peliculas =
+        await obtenerPeliculasApi();
+
+
+    // Si el backend no responde,
+    // usa los datos temporales de datos.js
+    if (
+        !peliculas ||
+        peliculas.length === 0
+    ) {
+
+        peliculas =
+            window.peliculas;
+    }
+
+
+    // Recorre las tarjetas que ya existen en el HTML
+    tarjetasPeliculas.forEach(
+        function (tarjeta) {
+
+            const peliculaId =
+                tarjeta.dataset.id;
+
+
+            const pelicula =
+                buscarPeliculaEnLista(
+                    peliculas,
+                    peliculaId
+                );
+
+
+            // Oculta la tarjeta si no existe
+            // una película para ese identificador
+            if (!pelicula) {
+
+                tarjeta.style.display =
+                    "none";
+
+                return;
+            }
+
+
+            // Muestra la tarjeta
+            tarjeta.style.display =
+                "";
+
+
+            // Coloca los datos recibidos
+            actualizarTarjeta(
+                tarjeta,
+                pelicula
+            );
+        }
+    );
+}
+
+
+// MUESTRA LAS PELÍCULAS ACTUALES
+
+if (filtroHoy) {
+
+    filtroHoy.addEventListener(
+        "click",
+        function () {
+
+            filtroHoy.classList.add(
+                "filtro-activo"
+            );
+
+
+            if (filtroProximos) {
+
+                filtroProximos.classList.remove(
+                    "filtro-activo"
+                );
+            }
+
+
+            tarjetasPeliculas.forEach(
+                function (tarjeta) {
+
+                    tarjeta.style.display =
+                        "";
+                }
+            );
+
+
+            if (tarjetaProximamente) {
+
+                tarjetaProximamente.style.display =
+                    "none";
+            }
+        }
+    );
+}
+
+
+// MUESTRA PRÓXIMOS ESTRENOS
+
+if (filtroProximos) {
+
+    filtroProximos.addEventListener(
+        "click",
+        function () {
+
+            filtroProximos.classList.add(
+                "filtro-activo"
+            );
+
+
+            if (filtroHoy) {
+
+                filtroHoy.classList.remove(
+                    "filtro-activo"
+                );
+            }
+
+
+            tarjetasPeliculas.forEach(
+                function (tarjeta) {
+
+                    tarjeta.style.display =
+                        "none";
+                }
+            );
+
+
+            if (tarjetaProximamente) {
+
+                tarjetaProximamente.style.display =
+                    "flex";
+            }
+        }
+    );
+}
+
+
+// OCULTA PRÓXIMOS ESTRENOS AL INICIAR
+
+if (tarjetaProximamente) {
+
+    tarjetaProximamente.style.display =
+        "none";
+}
+
+
+// CARGA LA CARTELERA
+
+cargarCartelera();

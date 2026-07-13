@@ -320,6 +320,36 @@
     cursor: not-allowed;
 }
 
+/* MENSAJE CUANDO NO EXISTEN FUNCIONES */
+
+.mensaje-sin-funciones {
+    display: none;
+    padding: 32px;
+    background-color: rgba(32, 31, 31, 0.60);
+    color: #e9bcb6;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    text-align: center;
+    font-size: 16px;
+}
+
+
+/* MENSAJE DE CARGA */
+
+.mensaje-cargando {
+    grid-column: 1 / -1;
+    padding: 32px;
+    color: #e9bcb6;
+    text-align: center;
+}
+
+
+/* PERMITE QUE LOS HORARIOS BAJEN DE LÍNEA */
+
+.horarios-cine {
+    flex-wrap: wrap;
+}
+
 
 /* AJUSTE PARA LAPTOPS PEQUEÑAS */
 

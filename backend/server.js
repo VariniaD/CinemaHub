@@ -4,6 +4,8 @@ const app = require("./src/app");
 
 const sequelize = require("./src/config/database");
 
+require("./src/models");
+
 //IMPORTACION DE MODELOS
 
 require("./src/models");

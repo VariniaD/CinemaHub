@@ -3,6 +3,8 @@
 const parametros =
     new URLSearchParams(window.location.search);
 
+let funcionId =
+    parametros.get("funcionId");
 
 // GUARDA LOS DATOS DE LA FUNCIÓN
 
@@ -311,18 +313,32 @@ function actualizarBoton() {
 
 
         botonContinuar.href =
-            "compra.html?id=" +
+            "compra.html?funcionId=" +
+            encodeURIComponent(
+                funcionId || ""
+            ) +
+            "&id=" +
             peliculaId +
             "&cine=" +
-            encodeURIComponent(cineSeleccionado) +
+            encodeURIComponent(
+                cineSeleccionado
+            ) +
             "&sala=" +
-            encodeURIComponent(salaSeleccionada) +
+            encodeURIComponent(
+                salaSeleccionada
+            ) +
             "&hora=" +
-            encodeURIComponent(horaSeleccionada) +
+            encodeURIComponent(
+                horaSeleccionada
+            ) +
             "&fecha=" +
-            encodeURIComponent(fechaSeleccionada) +
+            encodeURIComponent(
+                fechaSeleccionada
+            ) +
             "&asientos=" +
-            encodeURIComponent(asientosTexto);
+            encodeURIComponent(
+                asientosTexto
+            );
 
     } else {
 
