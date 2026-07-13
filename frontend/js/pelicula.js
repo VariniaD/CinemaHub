@@ -11,7 +11,7 @@ let peliculaId =
 
 
 if (!peliculaId) {
-    peliculaId = "1";
+    peliculaId = "2";
 }
 
 

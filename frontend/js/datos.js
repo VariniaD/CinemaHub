@@ -1,5 +1,4 @@
 // DATOS TEMPORALES DE LAS PELÍCULAS
-// Más adelante estos datos podrán llegar desde el backend.
 
 window.peliculas = [
     {
