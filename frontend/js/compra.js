@@ -10,6 +10,11 @@ const cargoServicio = 5;
 const parametros =
     new URLSearchParams(window.location.search);
 
+    // OBTIENE EL IDENTIFICADOR DE LA FUNCIÓN
+
+let funcionId =
+    parametros.get("funcionId");
+
 
 // GUARDA LOS DATOS RECIBIDOS
 
@@ -301,6 +306,7 @@ formularioCompra.addEventListener(
         // Este objeto luego podrá enviarse al backend.
 
         const datosCompra = {
+            funcionId: funcionId,
             peliculaId: peliculaId,
             pelicula: pelicula.titulo,
             imagen: pelicula.imagen,

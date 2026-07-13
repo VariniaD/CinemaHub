@@ -145,29 +145,18 @@ function actualizarTarjeta(
     }
 
 
-    // Actualiza el enlace directo a asientos
-    if (botonAsientos) {
+   // ENVÍA AL DETALLE PARA SELECCIONAR UNA FUNCIÓN REAL
 
-        botonAsientos.dataset.id =
-            pelicula.id;
+if (botonAsientos) {
 
-        botonAsientos.href =
-            "asientos.html?id=" +
-            pelicula.id +
-            "&cine=centro" +
-            "&sala=" +
-            encodeURIComponent(
-                "Sala Premium"
-            ) +
-            "&hora=" +
-            encodeURIComponent(
-                "19:30"
-            ) +
-            "&fecha=" +
-            encodeURIComponent(
-                obtenerFechaActual()
-            );
-    }
+    botonAsientos.dataset.id =
+        pelicula.id;
+
+    botonAsientos.href =
+        "pelicula.html?id=" +
+        pelicula.id +
+        "#funciones";
+}
 }
 
 
